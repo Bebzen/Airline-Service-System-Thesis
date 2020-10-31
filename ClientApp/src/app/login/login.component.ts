@@ -26,7 +26,6 @@ export class LoginComponent {
                 const token = result.token;
                 localStorage.setItem('jwt', token);
                 this.invalidLogin = false;
-                console.log(result);
             }, err => {
                 this.invalidLogin = true;
             });
