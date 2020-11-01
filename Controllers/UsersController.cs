@@ -37,14 +37,14 @@ namespace AirlineServiceSoftware.Controllers
         }
 
         [Authorize(Roles = Role.Admin)]
-        [HttpGet]
+        [HttpGet("GetUsers")]
         public IActionResult GetUsers()
         {
             var users = _userService.GetUsers();
             return Ok(users);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("GetUsers/{id?}")]
         public IActionResult GetById(int id)
         {
             var currentUserId = int.Parse(User.Identity.Name);
