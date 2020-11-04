@@ -5,8 +5,13 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using AirlineServiceSoftware.DataAccess;
 using AirlineServiceSoftware.Entities;
 using AirlineServiceSoftware.Helpers;
+using AirlineServiceSoftware.Mediators.MediatorsRequests;
+using AirlineServiceSoftware.Mediators.MediatorsRequests.Users;
+using BCrypt.Net;
+using MediatR;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
@@ -14,29 +19,21 @@ namespace AirlineServiceSoftware.Services
 {
     public class UserService : IUserService
     {
-        private List<User> _users = new List<User>
-        {
-            new User()
-            {
-                Id = 1, Username = "admin", Password = "admin", FirstName = "benzen", LastName = "toluen",
-                Role = Role.Admin
-            },
-            new User()
-            {
-                Id = 2, Username = "user", Password = "user", FirstName = "heksan", LastName = "pentan",
-                Role = Role.Customer
-            }
-        };
-
+        private readonly IMediator _mediator;
         private readonly AppSettings _appSettings;
-        public UserService(IOptions<AppSettings> appSettings)
+        private readonly IUserDataService _userDataService;
+        public UserService(IOptions<AppSettings> appSettings, IMediator mediator, IUserDataService userDataService)
         {
+            _mediator = mediator;
             _appSettings = appSettings.Value;
+            _userDataService = userDataService;
         }
         public User Authenticate(string username, string password)
         {
-            var user = _users.SingleOrDefault(x => x.Username == username && x.Password == password);
-            if (user == null)
+            var users = _mediator.Send(new GetUserByUsernameRequest() {Username = username}).Result;
+            var user = users.SingleOrDefault();
+            var isValid = BCrypt.Net.BCrypt.Verify(password, user.Password);
+            if (!isValid)
             {
                 return null;
             }
@@ -61,12 +58,15 @@ namespace AirlineServiceSoftware.Services
 
         public IEnumerable<User> GetUsers()
         {
-            return _users.WithoutPasswords();
+            var users = _mediator.Send(new GetUsersRequest()).Result;
+            users = users.WithoutPasswords();
+            return users;
         }
 
-        public User GetById(int id)
+        public User GetUserById(int id)
         {
-            var user = _users.FirstOrDefault(x => x.Id == id);
+            var users = _mediator.Send(new GetUserByIdRequest() {Id = id}).Result;
+            var user = users.FirstOrDefault();
             return user.WithoutPassword();
         }
     }

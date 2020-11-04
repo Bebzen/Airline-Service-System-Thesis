@@ -10,6 +10,7 @@ namespace AirlineServiceSoftware.Services
     {
         User Authenticate(string username, string password);
         IEnumerable<User> GetUsers();
-        User GetById(int id);
+        User GetUserById(int id);
+
     }
 }

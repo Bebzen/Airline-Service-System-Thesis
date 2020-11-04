@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using AirlineServiceSoftware.DataAccess;
 using AirlineServiceSoftware.Helpers;
 using AirlineServiceSoftware.Services;
 using MediatR;
@@ -36,9 +37,14 @@ namespace AirlineServiceSoftware
                         .AllowAnyMethod();
                 });
             });
+            // dependency injection of all the services
+            services.AddScoped<IUserDataService, UserDataService>(ctor =>
+                new UserDataService(Configuration.GetConnectionString("Database")));
+            services.AddScoped<IUserService, UserService>();
+
+            // configuring authentication
             var appSettingsSection = Configuration.GetSection("AppSettings");
             services.Configure<AppSettings>(appSettingsSection);
-
             var appSettings = appSettingsSection.Get<AppSettings>();
             var key = Encoding.ASCII.GetBytes(appSettings.Secret);
 
@@ -60,8 +66,6 @@ namespace AirlineServiceSoftware
                     ValidateAudience = false
                 };
             });
-
-            services.AddScoped<IUserService, UserService>();
 
             services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory

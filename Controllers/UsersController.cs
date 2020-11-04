@@ -32,7 +32,6 @@ namespace AirlineServiceSoftware.Controllers
             {
                 return BadRequest(new {message = "Username or Password is incorrect"});
             }
-
             return Ok(user);
         }
 
@@ -53,7 +52,7 @@ namespace AirlineServiceSoftware.Controllers
                 return Forbid();
             }
 
-            var user = _userService.GetById(id);
+            var user = _userService.GetUserById(id);
             if (user == null)
             {
                 return NotFound();
