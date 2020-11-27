@@ -9,11 +9,12 @@ using AirlineServiceSoftware.Entities;
 using AirlineServiceSoftware.Mediators.MediatorsRequests;
 using AirlineServiceSoftware.Mediators.MediatorsRequests.Users;
 using Dapper;
+using MediatR;
 using Microsoft.Extensions.Configuration.EnvironmentVariables;
 
 namespace AirlineServiceSoftware.DataAccess
 {
-    public class UserDataService :IUserDataService
+    public class UserDataService : IUserDataService
     {
         private readonly string _connectionString;
 
@@ -58,6 +59,61 @@ namespace AirlineServiceSoftware.DataAccess
                 conn.Open();
 
                 return conn.Query<User>("GetAllUsers", commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public async Task<bool> CreateUser(CreateUserRequest request)
+        {
+            await using (var conn = new SqlConnection(_connectionString))
+            {
+                conn.Open();
+                var parameters = new DynamicParameters();
+                parameters.Add("@Username", request.Username);
+                parameters.Add("@Password", request.Password);
+                parameters.Add("@Role", request.Role);
+                parameters.Add("@FirstName", request.FirstName);
+                parameters.Add("@LastName", request.LastName);
+                parameters.Add("@Phone", request.PhoneNumber);
+                parameters.Add("@Email", request.Email);
+                parameters.Add("@PESEL", request.Pesel);
+                parameters.Add("@IDCard", request.DocumentID);
+
+                var result = conn.Query<bool>("CreateUser", parameters, commandType: CommandType.StoredProcedure);
+                return result.SingleOrDefault();
+            }
+        }
+
+        public async Task<bool> EditUser(EditUserRequest request)
+        {
+            await using (var conn = new SqlConnection(_connectionString))
+            {
+                conn.Open();
+                var parameters = new DynamicParameters();
+                parameters.Add("@Id", request.Id);
+                parameters.Add("@Username", request.Username);
+                parameters.Add("@Password", request.Password);
+                parameters.Add("@Role", request.Role);
+                parameters.Add("@FirstName", request.FirstName);
+                parameters.Add("@LastName", request.LastName);
+                parameters.Add("@Phone", request.PhoneNumber);
+                parameters.Add("@Email", request.Email);
+                parameters.Add("@PESEL", request.Pesel);
+                parameters.Add("@IDCard", request.DocumentID);
+
+                var result = conn.Query<bool>("EditUser", parameters, commandType: CommandType.StoredProcedure);
+                return result.SingleOrDefault();
+            }
+        }
+
+        public async Task<bool> DeleteUser(DeleteUserRequest request)
+        {
+            await using (var conn = new SqlConnection(_connectionString))
+            {
+                conn.Open();
+                var parameters = new DynamicParameters();
+                parameters.Add("@Id", request.Id);
+                var result = conn.Query("DeleteUser", parameters, commandType: CommandType.StoredProcedure);
+                return result.SingleOrDefault();
             }
         }
     }

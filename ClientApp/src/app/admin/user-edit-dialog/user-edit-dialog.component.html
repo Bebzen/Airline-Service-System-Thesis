@@ -1,0 +1,45 @@
+<mat-form-field>
+    <mat-label>Username</mat-label>
+    <input matInput [(ngModel)]="data.username">
+</mat-form-field>
+<mat-form-field>
+    <mat-label>Role</mat-label>
+    <mat-select [(ngModel)]="data.role">
+        <mat-option value="Admin">Admin</mat-option>
+        <mat-option value="User">User</mat-option>
+    </mat-select>
+</mat-form-field>
+<br>
+<mat-form-field>
+    <mat-label>Password</mat-label>
+    <input type="password" matInput [(ngModel)]="data.password">
+</mat-form-field>
+<br>
+<br>
+<mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput [(ngModel)]="data.firstName">
+</mat-form-field>
+<mat-form-field>
+    <mat-label>Email</mat-label>
+    <input type="email" matInput [(ngModel)]="data.email">
+</mat-form-field>
+<br>
+<mat-form-field>
+    <mat-label>Surname</mat-label>
+    <input matInput [(ngModel)]="data.lastName">
+</mat-form-field>
+<mat-form-field>
+    <mat-label>Pesel</mat-label>
+    <input matInput [(ngModel)]="data.pesel">
+</mat-form-field>
+<br>
+<mat-form-field>
+    <mat-label>Phone Number</mat-label>
+    <input type="tel" placeholder="Format: 123-456-789" matInput [(ngModel)]="data.phoneNumber">
+</mat-form-field>
+<mat-form-field>
+    <mat-label>ID Card Number</mat-label>
+    <input matInput [(ngModel)]="data.documentId">
+</mat-form-field>
+<button mat-raised-button color="primary" (click)="onClickEditUser(data)">Submit</button>
