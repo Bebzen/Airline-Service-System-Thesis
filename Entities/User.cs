@@ -13,6 +13,10 @@ namespace AirlineServiceSoftware.Entities
         public string Role { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        public int PhoneNumber { get; set; }
+        public string Email { get; set; }
+        public string Pesel { get; set; }
+        public string DocumentID { get; set; }
         public string Token { get; set; }
     }
 }

@@ -7,5 +7,9 @@ export interface IUser {
     role: Role;
     firstName: string;
     lastName: string;
+    phoneNumber?: number;
+    email?: string;
+    pesel?: string;
+    documentId?: string;
     token?: string;
 }

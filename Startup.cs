@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,6 +10,7 @@ using System.Text;
 using AirlineServiceSoftware.DataAccess;
 using AirlineServiceSoftware.Helpers;
 using AirlineServiceSoftware.Services;
+using AirlineServiceSoftware.Services.Login;
 using MediatR;
 
 namespace AirlineServiceSoftware

@@ -1,11 +1,11 @@
 <body>
-  <nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="user">
-    <div class="navbar-nav">
-        <a class="nav-item nav-link" routerLink="/">Home</a>
-        <a class="nav-item nav-link" routerLink="/admin" *ngIf="isAdmin">Admin</a>
-        <a class="nav-item nav-link" (click)="logout()">Logout</a>
-    </div>
-</nav>
+  <mat-toolbar color="primary" >
+    <span><mat-icon>airplanemode_active</mat-icon> Linia Lotnicza</span>
+    <button mat-icon-button class="home-icon" routerLink="/" *ngIf="user"><mat-icon>home</mat-icon></button>
+    <button mat-icon-button class="admin-icon" routerLink="/admin" *ngIf="isAdmin"><mat-icon>admin_panel_settings</mat-icon></button>
+    <span class="example-spacer"></span>
+    <button mat-icon-button class="logout-icon" (click)="logout()"><mat-icon>login</mat-icon></button>
+  </mat-toolbar>
 <div class="container">
   <router-outlet></router-outlet>
 </div>

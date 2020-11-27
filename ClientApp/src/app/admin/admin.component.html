@@ -1,11 +1,94 @@
 <div class="card mt-4">
     <h4 class="card-header">Admin</h4>
     <div class="card-body">
-        <p>This page can be accessed <u>only by administrators</u>.</p>
-        <p class="mb-1">All users from secure (admin only) api end point:</p>
+        <mat-accordion>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    Create User
+                </mat-expansion-panel-header>
+                <mat-form-field>
+                    <mat-label>Username</mat-label>
+                    <input matInput [(ngModel)]="newUser.username">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Role</mat-label>
+                    <mat-select [(ngModel)]="newUser.role">
+                        <mat-option value="Admin">Admin</mat-option>
+                        <mat-option value="User">User</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <br>
+                <mat-form-field>
+                    <mat-label>Password</mat-label>
+                    <input type="password" matInput [(ngModel)]="newUser.password">
+                </mat-form-field>
+                <br>
+                <br>
+                <mat-form-field>
+                    <mat-label>Name</mat-label>
+                    <input matInput [(ngModel)]="newUser.firstName">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Email</mat-label>
+                    <input type="email" matInput [(ngModel)]="newUser.email">
+                </mat-form-field>
+                <br>
+                <mat-form-field>
+                    <mat-label>Surname</mat-label>
+                    <input matInput [(ngModel)]="newUser.lastName">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>Pesel</mat-label>
+                    <input matInput [(ngModel)]="newUser.pesel">
+                </mat-form-field>
+                <br>
+                <mat-form-field>
+                    <mat-label>Phone Number</mat-label>
+                    <input type="tel" placeholder="Format: 123-456-789" matInput [(ngModel)]="newUser.phoneNumber">
+                </mat-form-field>
+                <mat-form-field>
+                    <mat-label>ID Card Number</mat-label>
+                    <input matInput [(ngModel)]="newUser.documentId">
+                </mat-form-field>
+                <br>
+                <button mat-raised-button color="primary" (click)="onClickCreateUser()">Submit</button>
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    View All Users
+                </mat-expansion-panel-header>
+                <div class ="table-responsive col-md-12 mb-4">
+                    <table class="table table-bordered" id="dataTable">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>Surname</th>
+                                <th>Username</th>
+                                <th>Role</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr id="UsersRow_{{user.id}}" *ngFor="let user of users">
+                                <td>{{user.id}}</td>
+                                <td>{{user.firstName}}</td>
+                                <td>{{user.lastName}}</td>
+                                <td>{{user.username}}</td>
+                                <td>{{user.role}}</td>
+                                <td>
+                                    <a class="btn btn-success btn-circle btn-sm" (click)="onClickEditUser(user)">Edit</a>
+                                </td>
+                                <td>
+                                    <a class="btn btn-success btn-circle btn-sm" (click)="onClickDeleteUser(user)">Delete</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
         <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
-        <ul *ngIf="users">
-            <li *ngFor="let user of users">{{user.firstName}} {{user.lastName}}</li>
-        </ul>
     </div>
 </div>

@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs/operators';
 import { AuthenticationService } from '../services/authentication.service';
+import { IUser } from './interfaces/iUser';
+import { Role } from './interfaces/Role';
 import { LoginService } from './services/loginService';
 
 @Component ({
@@ -17,7 +19,9 @@ export class LoginComponent implements OnInit {
     loginForm: FormGroup;
     loading = false;
     submitted = false;
+    user: IUser;
     returnUrl: string;
+    returnUrlAdmin: string;
     error = '';
 
     constructor (
@@ -39,6 +43,7 @@ export class LoginComponent implements OnInit {
             password: ['', Validators.required]
         });
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+        this.returnUrlAdmin = this.route.snapshot.queryParams['returnUrl'] || '/admin';
     }
 
     get f() {
@@ -51,14 +56,16 @@ export class LoginComponent implements OnInit {
         if (this.loginForm.invalid) {
             return;
         }
-        // this.credentials.username = this.f.username.value;
-        // this.credentials.password = this.f.password.value;
         this.loading = true;
         this.authenticationService.login(this.f.username.value, this.f.password.value)
             .pipe(first())
             .subscribe(
-                date => {
-                    this.router.navigate([this.returnUrl]);
+                data => {
+                    if (data.role === Role.Admin) {
+                        this.router.navigate([this.returnUrlAdmin]);
+                    } else {
+                        this.router.navigate([this.returnUrl]);
+                    }
                 },
                 error => {
                     this.error = error;

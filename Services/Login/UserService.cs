@@ -12,10 +12,11 @@ using AirlineServiceSoftware.Mediators.MediatorsRequests;
 using AirlineServiceSoftware.Mediators.MediatorsRequests.Users;
 using BCrypt.Net;
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
-namespace AirlineServiceSoftware.Services
+namespace AirlineServiceSoftware.Services.Login
 {
     public class UserService : IUserService
     {
@@ -30,8 +31,15 @@ namespace AirlineServiceSoftware.Services
         }
         public User Authenticate(string username, string password)
         {
+            // use this to generate passwords for future user testing
+            var generatePassword = BCrypt.Net.BCrypt.HashPassword(password);
+            //
             var users = _mediator.Send(new GetUserByUsernameRequest() {Username = username}).Result;
             var user = users.SingleOrDefault();
+            if (user == null)
+            {
+                return null;
+            }
             var isValid = BCrypt.Net.BCrypt.Verify(password, user.Password);
             if (!isValid)
             {
@@ -68,6 +76,50 @@ namespace AirlineServiceSoftware.Services
             var users = _mediator.Send(new GetUserByIdRequest() {Id = id}).Result;
             var user = users.FirstOrDefault();
             return user.WithoutPassword();
+        }
+
+        public Boolean CreateUser(User newUser)
+        {
+            var result = _mediator.Send(new CreateUserRequest()
+            {
+                Username = newUser.Username,
+                Password = newUser.Password,
+                Role = newUser.Role,
+                FirstName = newUser.FirstName,
+                LastName = newUser.LastName,
+                PhoneNumber = newUser.PhoneNumber,
+                Email = newUser.Email,
+                Pesel = newUser.Pesel,
+                DocumentID = newUser.DocumentID
+            }).Result;
+            return result;
+        }
+
+        public Boolean EditUser(User editUser)
+        {
+            var result = _mediator.Send(new EditUserRequest()
+            {
+                Id = editUser.Id,
+                Username = editUser.Username,
+                Password = editUser.Password,
+                Role = editUser.Role,
+                FirstName = editUser.FirstName,
+                LastName = editUser.LastName,
+                PhoneNumber = editUser.PhoneNumber,
+                Email = editUser.Email,
+                Pesel = editUser.Pesel,
+                DocumentID = editUser.DocumentID
+            }).Result;
+            return result;
+        }
+        // TODO: Find some better types for those because they keep throwing exceptions :(
+        public bool DeleteUser(int id)
+        {
+            var result = _mediator.Send(new DeleteUserRequest()
+            {
+                Id = id
+            }).Result;
+            return result;
         }
     }
 }

@@ -60,5 +60,27 @@ namespace AirlineServiceSoftware.Controllers
 
             return Ok(user);
         }
+
+        [HttpPost("CreateUser")]
+        public IActionResult CreateUser([FromBody] User UserData)
+        {
+            var result = _userService.CreateUser(UserData);
+            return Ok(result);
+        }
+
+        [HttpPost("EditUser")]
+        public IActionResult EditUser([FromBody] User UserData)
+        {
+            var result = _userService.EditUser(UserData);
+            return Ok(result);
+        }
+
+        [HttpDelete("DeleteUser/{Id}")]
+        public IActionResult DeleteUser(int Id)
+        {
+            var result = _userService.DeleteUser(Id);
+            return Ok(result);
+        }
+
     }
 }
