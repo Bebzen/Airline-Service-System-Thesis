@@ -8,15 +8,6 @@ export class AuthGuard implements CanActivate {
     constructor(private router: Router, private authenticationService: AuthenticationService) {
 
     }
-    // canActivate() {
-    //     const token = localStorage.getItem('jwt');
-    //     if (token && !this.jwtHelper.isTokenExpired(token)) {
-    //         return true;
-    //     }
-    //     // console.log(token);
-    //     this.router.navigate(['']);
-    //     return false;
-    // }
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         const user = this.authenticationService.userValue;
         if (user) {
@@ -34,5 +25,4 @@ export class AuthGuard implements CanActivate {
         this.router.navigate(['/login'], {queryParams: {returnUrl: state.url} });
         return false;
     }
-
 }

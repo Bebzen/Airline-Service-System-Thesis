@@ -57,30 +57,43 @@ namespace AirlineServiceSoftware.Controllers
             {
                 return NotFound();
             }
-
             return Ok(user);
         }
 
+        [Authorize(Roles = Role.Admin)]
         [HttpPost("CreateUser")]
         public IActionResult CreateUser([FromBody] User UserData)
         {
             var result = _userService.CreateUser(UserData);
+            if (!result)
+            {
+                return BadRequest(new { message = "User was not added." });
+            }
             return Ok(result);
         }
 
+        [Authorize(Roles = Role.Admin)]
         [HttpPost("EditUser")]
         public IActionResult EditUser([FromBody] User UserData)
         {
             var result = _userService.EditUser(UserData);
+            if (!result)
+            {
+                return BadRequest(new { message = "User was not modified." });
+            }
             return Ok(result);
         }
 
+        [Authorize(Roles = Role.Admin)]
         [HttpDelete("DeleteUser/{Id}")]
         public IActionResult DeleteUser(int Id)
         {
             var result = _userService.DeleteUser(Id);
+            if (!result)
+            {
+                return BadRequest(new { message = "User was not deleted."});
+            }
             return Ok(result);
         }
-
     }
 }

@@ -10,9 +10,10 @@ import { AdministratorService } from '../services/administrator.service';
 })
 export class UserEditDialogComponent implements OnInit {
 
+    error = '';
+
     constructor(private administratorService: AdministratorService, public dialogRef: MatDialogRef<UserEditDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: IUser) {
-            console.log(data);
         }
     ngOnInit(): void {
 
@@ -28,7 +29,7 @@ export class UserEditDialogComponent implements OnInit {
                 console.log(result);
             },
             error => {
-                console.log(error);
+                this.error = error;
             }
         );
     }

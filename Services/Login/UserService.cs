@@ -78,48 +78,74 @@ namespace AirlineServiceSoftware.Services.Login
             return user.WithoutPassword();
         }
 
-        public Boolean CreateUser(User newUser)
+        public bool CreateUser(User newUser)
         {
-            var result = _mediator.Send(new CreateUserRequest()
+            bool result;
+            try
             {
-                Username = newUser.Username,
-                Password = newUser.Password,
-                Role = newUser.Role,
-                FirstName = newUser.FirstName,
-                LastName = newUser.LastName,
-                PhoneNumber = newUser.PhoneNumber,
-                Email = newUser.Email,
-                Pesel = newUser.Pesel,
-                DocumentID = newUser.DocumentID
-            }).Result;
-            return result;
+                result = _mediator.Send(new CreateUserRequest()
+                {
+                    Username = newUser.Username,
+                    Password = newUser.Password,
+                    Role = newUser.Role,
+                    FirstName = newUser.FirstName,
+                    LastName = newUser.LastName,
+                    PhoneNumber = newUser.PhoneNumber,
+                    Email = newUser.Email,
+                    Pesel = newUser.Pesel,
+                    DocumentID = newUser.DocumentId
+                }).Result;
+                return result;
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex);
+                return false;
+            }
         }
 
-        public Boolean EditUser(User editUser)
+        public bool EditUser(User editUser)
         {
-            var result = _mediator.Send(new EditUserRequest()
+            bool result;
+            try
             {
-                Id = editUser.Id,
-                Username = editUser.Username,
-                Password = editUser.Password,
-                Role = editUser.Role,
-                FirstName = editUser.FirstName,
-                LastName = editUser.LastName,
-                PhoneNumber = editUser.PhoneNumber,
-                Email = editUser.Email,
-                Pesel = editUser.Pesel,
-                DocumentID = editUser.DocumentID
-            }).Result;
-            return result;
+                result = _mediator.Send(new EditUserRequest()
+                {
+                    Id = editUser.Id,
+                    Username = editUser.Username,
+                    Password = editUser.Password,
+                    Role = editUser.Role,
+                    FirstName = editUser.FirstName,
+                    LastName = editUser.LastName,
+                    PhoneNumber = editUser.PhoneNumber,
+                    Email = editUser.Email,
+                    Pesel = editUser.Pesel,
+                    DocumentID = editUser.DocumentId
+                }).Result;
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return false;
+            }
         }
-        // TODO: Find some better types for those because they keep throwing exceptions :(
         public bool DeleteUser(int id)
         {
-            var result = _mediator.Send(new DeleteUserRequest()
+            bool result;
+            try
             {
-                Id = id
-            }).Result;
-            return result;
+                result = _mediator.Send(new DeleteUserRequest()
+                {
+                    Id = id
+                }).Result;
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return false;
+            }
         }
     }
 }

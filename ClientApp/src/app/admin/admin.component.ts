@@ -16,9 +16,38 @@ export class AdminComponent implements OnInit {
     loading = false;
     public newUser: IUser;
     users: IUser[] = [];
+    filteredUsers: IUser[] = [];
+    usernameFilter: string;
+    lastNameFilter: string;
+    addError = '';
+    deleteError = '';
+    deleteResultValid = '';
+    addResultValid = '';
 
     constructor(private userService: UserService, private administratorService: AdministratorService, public dialog: MatDialog) {
         this.newUser = {} as IUser;
+        this.usernameFilter = '';
+        this.lastNameFilter = '';
+    }
+
+    performFilter(filterLastName: string, filterUsername: string): IUser[] {
+        if (filterLastName == null) {
+            filterLastName = '';
+        }
+        if (filterUsername == null) {
+            filterUsername = '';
+        }
+        filterLastName = filterLastName.toLocaleLowerCase();
+        filterUsername = filterUsername.toLocaleLowerCase();
+        function filterResults(user: IUser) {
+            return (user.lastName.indexOf(filterLastName) !== -1) && (user.username.indexOf(filterUsername) !== -1);
+        }
+        const filtered = this.users.filter(filterResults);
+        return filtered;
+    }
+
+    onClickFilter() {
+        this.filteredUsers = this.performFilter(this.lastNameFilter, this.usernameFilter);
     }
 
     ngOnInit() {
@@ -26,18 +55,17 @@ export class AdminComponent implements OnInit {
         this.userService.getAll().pipe(first()).subscribe(users => {
             this.loading = false;
             this.users = users;
+            this.filteredUsers = users;
         });
     }
 
     onClickCreateUser() {
-        console.log(this.newUser);
-        this.newUser.phoneNumber = 123;
         this.administratorService.createUser(this.newUser).subscribe(
             result => {
-                console.log(result);
+                this.addResultValid = 'User Created.';
             },
             error => {
-                console.log(error);
+                this.addError = error;
             }
         );
     }
@@ -46,16 +74,15 @@ export class AdminComponent implements OnInit {
         this.dialog.open(UserEditDialogComponent,
             {width: '50%',
              data: user});
-
     }
 
     onClickDeleteUser(user: IUser) {
         this.administratorService.deleteUser(user.id).subscribe(
             result => {
-                console.log(result);
+                this.deleteResultValid = 'User Created.';
             },
             error => {
-                console.log(error);
+                this.deleteError = error;
             }
         );
 

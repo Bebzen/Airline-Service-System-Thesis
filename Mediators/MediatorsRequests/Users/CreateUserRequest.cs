@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AirlineServiceSoftware.Entities;
-using MediatR;
+﻿using MediatR;
 #pragma warning disable 8632
 
 namespace AirlineServiceSoftware.Mediators.MediatorsRequests.Users
 {
-    public class CreateUserRequest: IRequest<Boolean>
+    public class CreateUserRequest: IRequest<bool>
     {
         public string Username { get; set; }
         public string Password { get; set; }

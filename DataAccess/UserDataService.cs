@@ -57,63 +57,87 @@ namespace AirlineServiceSoftware.DataAccess
             await using (var conn = new SqlConnection(_connectionString))
             {
                 conn.Open();
-
                 return conn.Query<User>("GetAllUsers", commandType: CommandType.StoredProcedure);
             }
         }
 
         public async Task<bool> CreateUser(CreateUserRequest request)
         {
-            await using (var conn = new SqlConnection(_connectionString))
+            try
             {
-                conn.Open();
-                var parameters = new DynamicParameters();
-                parameters.Add("@Username", request.Username);
-                parameters.Add("@Password", request.Password);
-                parameters.Add("@Role", request.Role);
-                parameters.Add("@FirstName", request.FirstName);
-                parameters.Add("@LastName", request.LastName);
-                parameters.Add("@Phone", request.PhoneNumber);
-                parameters.Add("@Email", request.Email);
-                parameters.Add("@PESEL", request.Pesel);
-                parameters.Add("@IDCard", request.DocumentID);
+                await using (var conn = new SqlConnection(_connectionString))
+                {
+                    conn.Open();
+                    var parameters = new DynamicParameters();
+                    parameters.Add("@Username", request.Username);
+                    parameters.Add("@Password", request.Password);
+                    parameters.Add("@Role", request.Role);
+                    parameters.Add("@FirstName", request.FirstName);
+                    parameters.Add("@LastName", request.LastName);
+                    parameters.Add("@PhoneNumber", request.PhoneNumber);
+                    parameters.Add("@Email", request.Email);
+                    parameters.Add("@PESEL", request.Pesel);
+                    parameters.Add("@DocumentId", request.DocumentID);
 
-                var result = conn.Query<bool>("CreateUser", parameters, commandType: CommandType.StoredProcedure);
-                return result.SingleOrDefault();
+                    var result = conn.Query<bool>("CreateUser", parameters, commandType: CommandType.StoredProcedure);
+                    return true;
+                }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return false;
+            }
+            
         }
 
         public async Task<bool> EditUser(EditUserRequest request)
         {
-            await using (var conn = new SqlConnection(_connectionString))
+            try
             {
-                conn.Open();
-                var parameters = new DynamicParameters();
-                parameters.Add("@Id", request.Id);
-                parameters.Add("@Username", request.Username);
-                parameters.Add("@Password", request.Password);
-                parameters.Add("@Role", request.Role);
-                parameters.Add("@FirstName", request.FirstName);
-                parameters.Add("@LastName", request.LastName);
-                parameters.Add("@Phone", request.PhoneNumber);
-                parameters.Add("@Email", request.Email);
-                parameters.Add("@PESEL", request.Pesel);
-                parameters.Add("@IDCard", request.DocumentID);
+                await using (var conn = new SqlConnection(_connectionString))
+                {
+                    conn.Open();
+                    var parameters = new DynamicParameters();
+                    parameters.Add("@Id", request.Id);
+                    parameters.Add("@Username", request.Username);
+                    parameters.Add("@Password", request.Password);
+                    parameters.Add("@Role", request.Role);
+                    parameters.Add("@FirstName", request.FirstName);
+                    parameters.Add("@LastName", request.LastName);
+                    parameters.Add("@PhoneNumber", request.PhoneNumber);
+                    parameters.Add("@Email", request.Email);
+                    parameters.Add("@PESEL", request.Pesel);
+                    parameters.Add("@DocumentId", request.DocumentID);
 
-                var result = conn.Query<bool>("EditUser", parameters, commandType: CommandType.StoredProcedure);
-                return result.SingleOrDefault();
+                    var result = conn.Query<bool>("EditUser", parameters, commandType: CommandType.StoredProcedure);
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return false;
             }
         }
 
         public async Task<bool> DeleteUser(DeleteUserRequest request)
         {
-            await using (var conn = new SqlConnection(_connectionString))
+            try
             {
-                conn.Open();
-                var parameters = new DynamicParameters();
-                parameters.Add("@Id", request.Id);
-                var result = conn.Query("DeleteUser", parameters, commandType: CommandType.StoredProcedure);
-                return result.SingleOrDefault();
+                await using (var conn = new SqlConnection(_connectionString))
+                {
+                    conn.Open();
+                    var parameters = new DynamicParameters();
+                    parameters.Add("@Id", request.Id);
+                    var result = conn.Query("DeleteUser", parameters, commandType: CommandType.StoredProcedure);
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return false;
             }
         }
     }

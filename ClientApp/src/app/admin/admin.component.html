@@ -6,6 +6,11 @@
                 <mat-expansion-panel-header>
                     Create User
                 </mat-expansion-panel-header>
+                <div *ngIf="addResultValid" class="alert alert-success">{{addResultValid}}</div>
+                <br>
+                <div *ngIf="addError" class="alert alert-danger">{{addError}}</div>
+                <br>
+                <br>
                 <mat-form-field>
                     <mat-label>Username</mat-label>
                     <input matInput [(ngModel)]="newUser.username">
@@ -44,19 +49,32 @@
                 <br>
                 <mat-form-field>
                     <mat-label>Phone Number</mat-label>
-                    <input type="tel" placeholder="Format: 123-456-789" matInput [(ngModel)]="newUser.phoneNumber">
+                    <input type="number" placeholder="Format: 123-456-789" matInput [(ngModel)]="newUser.phoneNumber">
                 </mat-form-field>
                 <mat-form-field>
                     <mat-label>ID Card Number</mat-label>
                     <input matInput [(ngModel)]="newUser.documentId">
                 </mat-form-field>
-                <br>
                 <button mat-raised-button color="primary" (click)="onClickCreateUser()">Submit</button>
             </mat-expansion-panel>
             <mat-expansion-panel>
                 <mat-expansion-panel-header>
                     View All Users
                 </mat-expansion-panel-header>
+                <div *ngIf="deleteResultValid" class="alert alert-success">{{deleteResultValid}}</div>
+                <br>
+                <div *ngIf="deleteError" class="alert alert-danger">{{deleteError}}</div>
+                <br>
+                <br>
+                <div class="col-md-4">
+                    <mat-form-field>
+                        <input matInput [(ngModel)]="usernameFilter" placeholder="Filter by username">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input matInput [(ngModel)]="lastNameFilter" placeholder="Filter by last name">
+                    </mat-form-field>
+                    <button mat-raised-button color="primary" id="filterButton" style="position:absolute; right: 0;" (click)="onClickFilter()">Filter</button>
+                </div>
                 <div class ="table-responsive col-md-12 mb-4">
                     <table class="table table-bordered" id="dataTable">
                         <thead>
@@ -71,7 +89,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr id="UsersRow_{{user.id}}" *ngFor="let user of users">
+                            <tr id="UsersRow_{{user.id}}" *ngFor="let user of filteredUsers">
                                 <td>{{user.id}}</td>
                                 <td>{{user.firstName}}</td>
                                 <td>{{user.lastName}}</td>

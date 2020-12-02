@@ -16,7 +16,7 @@ namespace AirlineServiceSoftware.Entities
         public int PhoneNumber { get; set; }
         public string Email { get; set; }
         public string Pesel { get; set; }
-        public string DocumentID { get; set; }
+        public string DocumentId { get; set; }
         public string Token { get; set; }
     }
 }

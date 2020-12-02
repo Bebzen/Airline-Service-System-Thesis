@@ -42,4 +42,8 @@
     <mat-label>ID Card Number</mat-label>
     <input matInput [(ngModel)]="data.documentId">
 </mat-form-field>
+<br>
 <button mat-raised-button color="primary" (click)="onClickEditUser(data)">Submit</button>
+<br>
+<br>
+<div *ngIf="error" class="alert alert-danger">{{error}}</div>
