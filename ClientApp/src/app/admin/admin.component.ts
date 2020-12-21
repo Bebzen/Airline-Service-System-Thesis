@@ -63,6 +63,7 @@ export class AdminComponent implements OnInit {
         this.administratorService.createUser(this.newUser).subscribe(
             result => {
                 this.addResultValid = 'User Created.';
+                this.ngOnInit();
             },
             error => {
                 this.addError = error;
@@ -79,7 +80,8 @@ export class AdminComponent implements OnInit {
     onClickDeleteUser(user: IUser) {
         this.administratorService.deleteUser(user.id).subscribe(
             result => {
-                this.deleteResultValid = 'User Created.';
+                this.deleteResultValid = 'User Deleted.';
+                this.ngOnInit();
             },
             error => {
                 this.deleteError = error;

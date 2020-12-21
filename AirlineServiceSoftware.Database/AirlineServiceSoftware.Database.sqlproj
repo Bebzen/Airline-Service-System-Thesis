@@ -69,6 +69,7 @@
     <Build Include="dbo\Programmability\Stored Procedures\CreateUser.sql" />
     <Build Include="dbo\Programmability\Stored Procedures\EditUser.sql" />
     <Build Include="dbo\Programmability\Stored Procedures\DeleteUser.sql" />
+    <Build Include="dbo\Programmability\Stored Procedures\EditUserNoPasswordChange.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="AirlineServiceSoftware.Database.refactorlog" />

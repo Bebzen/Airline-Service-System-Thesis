@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using AirlineServiceSoftware.Entities;
 using AirlineServiceSoftware.Models;
@@ -64,12 +65,17 @@ namespace AirlineServiceSoftware.Controllers
         [HttpPost("CreateUser")]
         public IActionResult CreateUser([FromBody] User UserData)
         {
-            var result = _userService.CreateUser(UserData);
-            if (!result)
+            var passwordValidation = Regex.Matches(UserData.Password, @"^(?=.*[a - z])(?=.*[A - Z])(?=.*[0 - 9])(?=.*[$@$!%? &])[A - Za - z\d$@$!%? &]{ 8,}$").Count;
+            if (passwordValidation == 0)
             {
-                return BadRequest(new { message = "User was not added." });
+                var result = _userService.CreateUser(UserData);
+                if (!result)
+                {
+                    return BadRequest(new { message = "User was not added." });
+                }
+                return Ok(result);
             }
-            return Ok(result);
+            else return BadRequest(new { message = "Invalid password."});
         }
 
         [Authorize(Roles = Role.Admin)]
