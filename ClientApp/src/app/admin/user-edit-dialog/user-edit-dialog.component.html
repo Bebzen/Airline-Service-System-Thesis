@@ -1,18 +1,28 @@
 <mat-form-field>
     <mat-label>Username</mat-label>
-    <input matInput [(ngModel)]="data.username">
+    <input matInput [(ngModel)]="data.username" #name="ngModel" required>
 </mat-form-field>
 <mat-form-field>
     <mat-label>Role</mat-label>
-    <mat-select [(ngModel)]="data.role">
+    <mat-select [(ngModel)]="data.role" #role="ngModel" required>
         <mat-option value="Admin">Admin</mat-option>
         <mat-option value="User">User</mat-option>
     </mat-select>
 </mat-form-field>
+<div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+    <div *ngIf="name.errors.required">
+        Name is required.
+    </div>
+</div>
+<div *ngIf="role.invalid && (role.dirty || role.touched)" class="alert alert-danger">
+    <div *ngIf="role.errors.required">
+        Role is required.
+    </div>
+</div>
 <br>
 <mat-form-field>
     <mat-label>Password</mat-label>
-    <input type="password" matInput [(ngModel)]="data.password">
+    <input type="password" placeholder="If left empty, password will not change." matInput [(ngModel)]="data.password">
 </mat-form-field>
 <br>
 <br>

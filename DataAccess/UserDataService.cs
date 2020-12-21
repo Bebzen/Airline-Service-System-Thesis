@@ -93,6 +93,7 @@ namespace AirlineServiceSoftware.DataAccess
 
         public async Task<bool> EditUser(EditUserRequest request)
         {
+            
             try
             {
                 await using (var conn = new SqlConnection(_connectionString))
@@ -101,7 +102,7 @@ namespace AirlineServiceSoftware.DataAccess
                     var parameters = new DynamicParameters();
                     parameters.Add("@Id", request.Id);
                     parameters.Add("@Username", request.Username);
-                    parameters.Add("@Password", request.Password);
+                    if (request.Password != "noChange") parameters.Add("@Password", request.Password);
                     parameters.Add("@Role", request.Role);
                     parameters.Add("@FirstName", request.FirstName);
                     parameters.Add("@LastName", request.LastName);
@@ -109,8 +110,15 @@ namespace AirlineServiceSoftware.DataAccess
                     parameters.Add("@Email", request.Email);
                     parameters.Add("@PESEL", request.Pesel);
                     parameters.Add("@DocumentId", request.DocumentID);
-
-                    var result = conn.Query<bool>("EditUser", parameters, commandType: CommandType.StoredProcedure);
+                    if (request.Password != "noChange")
+                    {
+                        var result = conn.Query<bool>("EditUser", parameters, commandType: CommandType.StoredProcedure);
+                    }
+                    else
+                    {
+                        var result = conn.Query<bool>("EditUserNoPasswordChange", parameters, commandType: CommandType.StoredProcedure);
+                    }
+                        
                     return true;
                 }
             }
