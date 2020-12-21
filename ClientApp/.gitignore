@@ -17,7 +17,6 @@
 *.launch
 .settings/
 *.sublime-workspace
-*.jfm
 
 # IDE - VSCode
 .vscode/*
