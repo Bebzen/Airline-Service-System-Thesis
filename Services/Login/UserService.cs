@@ -106,6 +106,10 @@ namespace AirlineServiceSoftware.Services.Login
 
         public bool EditUser(User editUser)
         {
+            if (editUser.Password == null)
+            {
+                editUser.Password = "noChange";
+            }
             bool result;
             try
             {
