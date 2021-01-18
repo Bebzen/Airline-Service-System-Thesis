@@ -2,7 +2,8 @@
 A System that supports an airline's service designed as a part of my engineering thesis. Made in .NET Core and Angular.
 Since I started my first job I have learned a lot about making C# + Angular apps and I wanted to employ that knowledge here, in my thesis.
 I also wanted to learn more while working on this project so as to aid me in my future endeavors.
-The project is updated as I write my thesis.
+The project is not finished yet and I update it as I write my thesis.
+Currently The authorization mechanism and the administration module is finished.
 Documentation is available only in Polish.
 
 In order to run the app:
