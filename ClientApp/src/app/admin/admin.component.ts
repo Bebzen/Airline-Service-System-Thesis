@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { first } from 'rxjs/operators';
 import { IUser } from '../login/interfaces/iUser';
-import { Role } from '../login/interfaces/Role';
 import { UserService } from '../services/user.service';
 import { AdministratorService } from './services/administrator.service';
 import { UserEditDialogComponent } from './user-edit-dialog/user-edit-dialog.component';
@@ -10,7 +9,8 @@ import { UserEditDialogComponent } from './user-edit-dialog/user-edit-dialog.com
 
 @Component({
     templateUrl: 'admin.component.html',
-    styleUrls: ['./admin.component.scss']})
+    styleUrls: ['./admin.component.scss']
+})
 
 export class AdminComponent implements OnInit {
     loading = false;
@@ -40,7 +40,8 @@ export class AdminComponent implements OnInit {
         filterLastName = filterLastName.toLocaleLowerCase();
         filterUsername = filterUsername.toLocaleLowerCase();
         function filterResults(user: IUser) {
-            return (user.lastName.indexOf(filterLastName) !== -1) && (user.username.indexOf(filterUsername) !== -1);
+            return (user.lastName.toLocaleLowerCase().indexOf(filterLastName) !== -1) &&
+                   (user.username.toLocaleLowerCase().indexOf(filterUsername) !== -1);
         }
         const filtered = this.users.filter(filterResults);
         return filtered;
@@ -73,8 +74,10 @@ export class AdminComponent implements OnInit {
 
     onClickEditUser(user: IUser) {
         this.dialog.open(UserEditDialogComponent,
-            {width: '50%',
-             data: user});
+            {
+             width: '50%',
+             data: { user: user, disableEditing: false },
+            });
     }
 
     onClickDeleteUser(user: IUser) {

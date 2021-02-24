@@ -70,6 +70,12 @@
     <Build Include="dbo\Programmability\Stored Procedures\EditUser.sql" />
     <Build Include="dbo\Programmability\Stored Procedures\DeleteUser.sql" />
     <Build Include="dbo\Programmability\Stored Procedures\EditUserNoPasswordChange.sql" />
+    <Build Include="dbo\Programmability\Stored Procedures\GetAllPilots.sql" />
+    <Build Include="dbo\Tables\Crews.sql" />
+    <Build Include="dbo\Programmability\Stored Procedures\CreateCrew.sql" />
+    <Build Include="dbo\Programmability\Stored Procedures\GetAllCrews.sql" />
+    <Build Include="dbo\Programmability\Stored Procedures\DeleteCrew.sql" />
+    <Build Include="dbo\Programmability\Stored Procedures\EditCrew.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="AirlineServiceSoftware.Database.refactorlog" />

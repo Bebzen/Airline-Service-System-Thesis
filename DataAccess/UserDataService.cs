@@ -2,15 +2,11 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using AirlineServiceSoftware.Entities;
 using AirlineServiceSoftware.Mediators.MediatorsRequests;
 using AirlineServiceSoftware.Mediators.MediatorsRequests.Users;
 using Dapper;
-using MediatR;
-using Microsoft.Extensions.Configuration.EnvironmentVariables;
 
 namespace AirlineServiceSoftware.DataAccess
 {
@@ -52,7 +48,7 @@ namespace AirlineServiceSoftware.DataAccess
             }
         }
 
-        public async Task<IEnumerable<User>> GetUsers(GetUsersRequest request)
+        public async Task<IEnumerable<User>> GetAllUsers(GetUsersRequest request)
         {
             await using (var conn = new SqlConnection(_connectionString))
             {

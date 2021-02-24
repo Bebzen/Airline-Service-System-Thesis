@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './admin/admin.component';
+import { DispatcherComponent } from './dispatcher/dispatcher.component';
 import { AuthGuard } from './guards/auth-guard.service';
 import { HomeComponent } from './home/home.component';
 import { Role } from './login/interfaces/Role';
@@ -17,6 +18,12 @@ const routes: Routes = [
         component: AdminComponent,
         canActivate: [AuthGuard],
         data: {roles: [Role.Admin] }
+    },
+    {
+        path: 'dispatcher',
+        component: DispatcherComponent,
+        canActivate: [AuthGuard],
+        data: {roles: [Role.Admin, Role.Dispatcher]}
     },
     {
         path: 'login',

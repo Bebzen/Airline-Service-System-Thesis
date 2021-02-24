@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AirlineServiceSoftware.DataAccess;
@@ -22,7 +21,7 @@ namespace AirlineServiceSoftware.Mediators.MediatorsRequestsHandler.Users
 
         public Task<IEnumerable<User>> Handle(GetUsersRequest request, CancellationToken cancellationToken)
         {
-            return _userDataService.GetUsers(request);
+            return _userDataService.GetAllUsers(request);
         }
     }
 }
