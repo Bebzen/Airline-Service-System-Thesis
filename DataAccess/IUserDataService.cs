@@ -14,7 +14,7 @@ namespace AirlineServiceSoftware.DataAccess
     {
         Task<IEnumerable<User>> GetUserByUsername(GetUserByUsernameRequest request);
         Task<IEnumerable<User>> GetUserById(GetUserByIdRequest request);
-        Task<IEnumerable<User>> GetUsers(GetUsersRequest request);
+        Task<IEnumerable<User>> GetAllUsers(GetUsersRequest request);
         Task<bool> CreateUser(CreateUserRequest request);
         Task<bool> EditUser(EditUserRequest request);
         Task<bool> DeleteUser(DeleteUserRequest request);

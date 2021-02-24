@@ -18,7 +18,9 @@
                     <mat-label>Role</mat-label>
                     <mat-select [(ngModel)]="newUser.role" #role="ngModel" required>
                         <mat-option value="Admin">Admin</mat-option>
-                        <mat-option value="User">User</mat-option>
+                        <mat-option value="Dispatcher">Dispatcher</mat-option>
+                        <mat-option value="Pilot">Pilot</mat-option>
+                        <mat-option value="Customer">Customer</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">

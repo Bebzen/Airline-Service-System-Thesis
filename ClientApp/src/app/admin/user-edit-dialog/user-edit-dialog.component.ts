@@ -8,16 +8,18 @@ import { AdministratorService } from '../services/administrator.service';
     templateUrl: './user-edit-dialog.component.html',
     styleUrls: ['./user-edit-dialog.component.scss']
 })
-export class UserEditDialogComponent implements OnInit {
+export class UserEditDialogComponent {
 
     error = '';
+    editingDisabled: boolean;
 
-    constructor(private administratorService: AdministratorService, public dialogRef: MatDialogRef<UserEditDialogComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: IUser) {
+    constructor(
+        private administratorService: AdministratorService,
+        public dialogRef: MatDialogRef<UserEditDialogComponent>,
+        @Inject(MAT_DIALOG_DATA) public data: { user: IUser, disableEditing: boolean}
+        ) {
+            this.editingDisabled = data.disableEditing;
         }
-    ngOnInit(): void {
-
-    }
 
     onNoClick(): void {
         this.dialogRef.close();

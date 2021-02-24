@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AirlineServiceSoftware.DataAccess;
@@ -9,7 +7,7 @@ using MediatR;
 
 namespace AirlineServiceSoftware.Mediators.MediatorsRequestsHandler.Users
 {
-    public class DeleteUserRequestHandler : IRequestHandler<DeleteUserRequest, Boolean>
+    public class DeleteUserRequestHandler : IRequestHandler<DeleteUserRequest, bool>
     {
         private readonly IUserDataService _userDataService;
 
@@ -19,7 +17,7 @@ namespace AirlineServiceSoftware.Mediators.MediatorsRequestsHandler.Users
             _userDataService = dataAccessService;
         }
 
-        public Task<Boolean> Handle(DeleteUserRequest request, CancellationToken cancellationToken)
+        public Task<bool> Handle(DeleteUserRequest request, CancellationToken cancellationToken)
         {
             return _userDataService.DeleteUser(request);
         }

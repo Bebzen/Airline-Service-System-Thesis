@@ -1,0 +1,7 @@
+﻿CREATE PROCEDURE [dbo].[GetAllCrews]
+AS
+BEGIN
+	SELECT 
+	*
+	FROM Crews
+END

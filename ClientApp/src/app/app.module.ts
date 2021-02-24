@@ -18,6 +18,7 @@ import { UserService } from './services/user.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { AdminModule } from './admin/admin.module';
+import { DispatcherModule } from './dispatcher/dispatcher.module';
 
 export function tokenGetter() {
   return localStorage.getItem('jwt');
@@ -37,7 +38,8 @@ export function tokenGetter() {
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
-    AdminModule
+    AdminModule,
+    DispatcherModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

@@ -1,0 +1,127 @@
+<!--TODO: 
+1.Po pierwsze obsługa załóg a co za tym idzie utworzenie roli pilota.
+ - Tworzenie, Wyświetlanie, Edytowanie i Usuwanie załóg. + zrobione
+2.Obsługa lotów. Tu trochę bardziej skomplikowane to będzie...
+3. ...Bo trzeba będzie też obsługiwać rezerwacje klientów.
+
+Załoga to grup
+-->
+<div class="card mt-4">
+    <h4 class="card-header">Dispatcher</h4>
+    <div class="card-body">
+        <div *ngIf="addResultValid" class="alert alert-success">{{addResultValid}}</div>
+
+        <div *ngIf="addError" class="alert alert-danger">{{addError}}</div>
+        <mat-accordion>
+            <!-- Adding a crew-->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    Create Crew
+                </mat-expansion-panel-header>
+                <mat-form-field>
+                    <mat-label>Crew Name</mat-label>
+                    <input matInput [(ngModel)]="newCrew.crewName" required #crewName="ngModel">
+                </mat-form-field>
+
+                <div *ngIf="crewName.invalid && (crewName.dirty || crewName.touched)" class="alert alert-danger">
+                    <div *ngIf="crewName.errors.required">
+                        Field cannot be empty.
+                    </div>
+                </div>
+
+                <mat-form-field>
+                    <mat-label>Captain</mat-label>
+                    <mat-select 
+                    [(ngModel)]="newCrew.captain"
+                    name="pilot" 
+                    (selectionChange)="selectPilotCheck()"
+                    required
+                    #captain="ngModel"
+                    >
+                        <mat-option *ngFor="let pilot of pilots" [value]="pilot">
+                            {{pilot.firstName}} {{pilot.lastName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>First Officer</mat-label>
+                    <mat-select 
+                    [(ngModel)]="newCrew.firstOfficer" 
+                    name="pilot" 
+                    (selectionChange)="selectPilotCheck()"
+                    required
+                    #firstOfficer="ngModel"
+                    >
+                        <mat-option *ngFor="let pilot of pilots" [value]="pilot">
+                            {{pilot.firstName}} {{pilot.lastName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Second Officer</mat-label>
+                    <mat-select 
+                    [(ngModel)]="newCrew.secondOfficer" 
+                    name="pilot" 
+                    (selectionChange)="selectPilotCheck()"
+                    required
+                    #secondOfficer="ngModel"
+                    >
+                        <mat-option *ngFor="let pilot of pilots" [value]="pilot">
+                            {{pilot.firstName}} {{pilot.lastName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <div *ngIf="_selectionError" class="alert alert-danger">{{_selectionError}}</div>
+                <br>
+                <button mat-raised-button color="primary" (click)="onClickCreateCrew()">Create</button>
+            </mat-expansion-panel>
+
+            <!-- List of crews -->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    View All Crews
+                </mat-expansion-panel-header>
+                <div class="col-md-4">
+                    <mat-form-field>
+                        <input matInput [(ngModel)]="crewFilter" placeholder="Filter">
+                    </mat-form-field>
+                    <button mat-raised-button color="primary" id="filterButton" style="position: absolute; right: 0;" (click)="onClickFilter()">Filter</button>
+                </div>
+                <div class="table-responsive col-md-12 mb-4">
+                    <table class="table table-bordered" id="dataTable">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Crew Name</th>
+                                <th>Captain</th>
+                                <th>First Officer</th>
+                                <th>Second Officer</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr id="CrewsRow_{{crew.id}}" *ngFor="let crew of filteredCrews">
+                                <td>{{crew.id}}</td>
+                                <td>{{crew.crewName}}</td>
+                                <td (click)="onPilotClick(crew.captain)">{{crew.captain.firstName}} {{crew.captain.lastName}}</td>
+                                <td (click)="onPilotClick(crew.firstOfficer)">{{crew.firstOfficer.firstName}} {{crew.firstOfficer.lastName}}</td>
+                                <td (click)="onPilotClick(crew.secondOfficer)">{{crew.secondOfficer.firstName}} {{crew.secondOfficer.lastName}}</td>
+                                <td>
+                                    <a class="btn btn-success btn-circle btn-sm" (click)="onClickEditCrew(crew)">Edit</a>
+                                </td>
+                                <td>
+                                    <a class="btn btn-success btn-circle btn-sm" (click)="onClickDeleteCrew(crew)">Delete</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+</div>
