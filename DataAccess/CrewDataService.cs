@@ -82,7 +82,7 @@ namespace AirlineServiceSoftware.DataAccess
                     parameters.Add("@CaptainID", request.Captain.Id);
                     parameters.Add("@FirstOfficerID", request.FirstOfficer.Id);
                     parameters.Add("@SecondOfficerID", request.SecondOfficer.Id);
-                    var result = conn.Query("EditCrew", parameters, commandType: CommandType.StoredProcedure);
+                    conn.Query("EditCrew", parameters, commandType: CommandType.StoredProcedure);
                     return true;
                 }
             }

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { IUser } from 'src/app/login/interfaces/iUser';
 import { environment } from 'src/environments/environment';
 import { ICrew } from '../interfaces/iCrew';
+import { IFlight } from '../interfaces/iFlight';
 
 @Injectable()
 export class DispatcherService {
@@ -27,5 +28,21 @@ export class DispatcherService {
 
     deleteCrew(id: number) {
         return this.http.delete<number>(`${environment.apiUrl}Crews/DeleteCrew/${id}`);
+    }
+
+    createFlight(flight: IFlight) {
+        return this.http.post<IFlight>(`${environment.apiUrl}Flights/CreateFlight`, flight);
+    }
+
+    getAllFlights() {
+        return this.http.get<IFlight[]>(`${environment.apiUrl}Flights/GetAllFlights`);
+    }
+
+    editFlight(flight: IFlight) {
+        return this.http.post<IFlight>(`${environment.apiUrl}Flights/EditFlight`, flight);
+    }
+
+    deleteFlight(id: number) {
+        return this.http.delete<number>(`${environment.apiUrl}Flights/DeleteFlight/${id}`);
     }
 }

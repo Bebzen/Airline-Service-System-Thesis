@@ -1,9 +1,13 @@
 import { Component, OnInit} from '@angular/core';
 import { MatDialog } from '@angular/material';
+import * as moment from 'moment';
+import { Moment } from 'moment';
 import { UserEditDialogComponent } from '../admin/user-edit-dialog/user-edit-dialog.component';
 import { IUser } from '../login/interfaces/iUser';
 import { CrewEditDialogComponent } from './crew-edit-dialog/crew-edit-dialog.component';
 import { ICrew } from './interfaces/iCrew';
+import { IFlight } from './interfaces/iFlight';
+import { PlaneType } from './interfaces/PlaneType';
 import { DispatcherService } from './services/dispatcher.service';
 
 @Component({
@@ -23,6 +27,11 @@ export class DispatcherComponent implements OnInit {
     addResultValid = '';
     newCrew: ICrew;
     crewFilter: string;
+    newFlight: IFlight;
+
+    planeTypes;
+
+    newFlightDate: Moment;
 
     deleteResultValid = '';
 
@@ -33,7 +42,10 @@ export class DispatcherComponent implements OnInit {
 
     constructor(private dispatcherService: DispatcherService, public dialog: MatDialog) {
         this.newCrew = {} as ICrew;
+        this.newFlight = {} as IFlight;
         this.crewFilter = '';
+        this.planeTypes = this.enumSelector(PlaneType);
+        this.newFlight.flightDate = moment().add(0, 'days');
     }
 
     ngOnInit(): void {
@@ -48,6 +60,11 @@ export class DispatcherComponent implements OnInit {
             this.filteredCrews = crews;
         });
     }
+
+    enumSelector(definition) {
+        return Object.keys(definition)
+          .map(key => ({ value: definition[key], title: key }));
+      }
 
     performCrewFilter(filterCrew: string) {
         if (filterCrew == null) {
@@ -123,5 +140,11 @@ export class DispatcherComponent implements OnInit {
                 this.addError = error;
             });
         }
+    }
+
+    onClickCreateFlight(): void {
+        this.newFlight.isApproved = false;
+        this.newFlight.isCompleted = false;
+        this.newFlight.remainingSeats = this.newFlight.totalSeats;
     }
 }

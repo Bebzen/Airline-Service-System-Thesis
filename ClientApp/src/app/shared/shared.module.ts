@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule, MatCardModule, MatDialogModule, MatExpansionModule, MatFormFieldModule, MatIconModule,
+import { MatButtonModule, MatCardModule, MatCheckboxModule, MatDatepickerModule, MatDialogModule, MatExpansionModule, MatFormFieldModule, MatIconModule,
     MatInputModule, MatSelectModule, MatToolbarModule } from '@angular/material';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
 @NgModule ({
     declarations: [
@@ -11,7 +13,10 @@ import { MatButtonModule, MatCardModule, MatDialogModule, MatExpansionModule, Ma
         MatToolbarModule,
         MatIconModule,
         MatButtonModule,
-        MatFormFieldModule
+        MatFormFieldModule,
+        MatMomentDateModule,
+        MatDatepickerModule,
+        NgxMaterialTimepickerModule.setLocale('pl-PL'),
     ],
     exports: [
         MatToolbarModule,
@@ -24,7 +29,11 @@ import { MatButtonModule, MatCardModule, MatDialogModule, MatExpansionModule, Ma
         ReactiveFormsModule,
         FormsModule,
         MatSelectModule,
-        MatDialogModule
+        MatDialogModule,
+        MatDatepickerModule,
+        MatMomentDateModule,
+        MatCheckboxModule,
+        NgxMaterialTimepickerModule
     ]
 })
 

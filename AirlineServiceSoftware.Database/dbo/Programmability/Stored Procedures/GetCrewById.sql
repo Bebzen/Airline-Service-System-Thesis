@@ -1,11 +1,13 @@
-﻿CREATE PROCEDURE [dbo].[GetAllCrews]
+﻿CREATE PROCEDURE [dbo].[GetCrewById]
+	@Id int
 AS
 BEGIN
-	SELECT 
+	SELECT
 	[Id],
 	[CrewName],
 	[CaptainID],
 	[FirstOfficerID],
 	[SecondOfficerID]
 	FROM Crews
+	WHERE [Id] = @Id
 END

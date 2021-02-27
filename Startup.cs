@@ -13,6 +13,7 @@ using AirlineServiceSoftware.Services;
 using AirlineServiceSoftware.Services.Login;
 using MediatR;
 using AirlineServiceSoftware.Services.Crews;
+using AirlineServiceSoftware.Services.Flights;
 
 namespace AirlineServiceSoftware
 {
@@ -43,8 +44,12 @@ namespace AirlineServiceSoftware
                 new UserDataService(Configuration.GetConnectionString("Database")));
             services.AddScoped<ICrewDataService, CrewDataService>(ctor =>
                 new CrewDataService(Configuration.GetConnectionString("Database")));
+            services.AddScoped<IFlightDataService, FlightDataService>(ctor =>
+                new FlightDataService(Configuration.GetConnectionString("Database")));
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ICrewService, CrewService>();
+            services.AddScoped<IFlightService, FlightService>();
+            
 
             // configuring authentication
             var appSettingsSection = Configuration.GetSection("AppSettings");
