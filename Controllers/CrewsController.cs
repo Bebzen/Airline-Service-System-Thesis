@@ -52,13 +52,24 @@ namespace AirlineServiceSoftware.Controllers
         [HttpPost("EditCrew")]
         public IActionResult EditCrew([FromBody] Crew crewData)
         {
-
+            var result = _crewService.EditCrew(crewData);
+            if (!result)
+            {
+                return BadRequest(new { message = "Crew was not modified." });
+            }
+            return Ok(result);
         }
 
         [Authorize(Roles = "Admin, Dispatcher")]
         [HttpDelete("DeleteCrew/{Id}")]
         public IActionResult DeleteCrew(int Id)
         {
+            var result = _crewService.DeleteCrew(Id);
+            if (!result)
+            {
+                return BadRequest(new { message = "Crew was not deleted." });
+            }
+            return Ok(result);
 
         }  
     }

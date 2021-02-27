@@ -117,6 +117,7 @@ export class DispatcherComponent implements OnInit {
         if (this.selectPilotCheck()) {
             this.dispatcherService.createCrew(this.newCrew).subscribe(result => {
                 this.addResultValid = 'Crew Created';
+                this.ngOnInit();
             },
             error => {
                 this.addError = error;
