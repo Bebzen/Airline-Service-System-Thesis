@@ -42,12 +42,26 @@ namespace AirlineServiceSoftware.Services.Crews
 
         public bool DeleteCrew(int Id)
         {
-            throw new System.NotImplementedException();
+            var result = _mediator.Send(new DeleteCrewRequest()
+            {
+                Id = Id
+            }).Result;
+
+            return result;
         }
 
         public bool EditCrew(Crew editCrew)
         {
-            throw new System.NotImplementedException();
+            var result = _mediator.Send(new EditCrewRequest()
+            {
+                Id = editCrew.Id,
+                CrewName = editCrew.CrewName,
+                Captain = editCrew.Captain,
+                FirstOfficer = editCrew.FirstOfficer,
+                SecondOfficer = editCrew.SecondOfficer
+            }).Result;
+
+            return result;
         }
     }
 }

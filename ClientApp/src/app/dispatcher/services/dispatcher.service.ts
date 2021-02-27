@@ -26,6 +26,6 @@ export class DispatcherService {
     }
 
     deleteCrew(id: number) {
-        return this.http.delete<number>(`${environment.apiUrl}Crew/DeleteCrew/${id}`);
+        return this.http.delete<number>(`${environment.apiUrl}Crews/DeleteCrew/${id}`);
     }
 }
