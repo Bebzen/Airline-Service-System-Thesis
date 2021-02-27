@@ -76,6 +76,13 @@
     <Build Include="dbo\Programmability\Stored Procedures\GetAllCrews.sql" />
     <Build Include="dbo\Programmability\Stored Procedures\DeleteCrew.sql" />
     <Build Include="dbo\Programmability\Stored Procedures\EditCrew.sql" />
+    <Build Include="dbo\Tables\Flights.sql" />
+    <Build Include="dbo\Tables\Reservations.sql" />
+    <Build Include="dbo\Programmability\Stored Procedures\CreateFlight.sql" />
+    <Build Include="dbo\Programmability\Stored Procedures\EditFlight.sql" />
+    <Build Include="dbo\Programmability\Stored Procedures\DeleteFlight.sql" />
+    <Build Include="dbo\Programmability\Stored Procedures\GetAllFlights.sql" />
+    <Build Include="dbo\Programmability\Stored Procedures\GetCrewById.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="AirlineServiceSoftware.Database.refactorlog" />

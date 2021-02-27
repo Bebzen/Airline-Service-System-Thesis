@@ -2,6 +2,7 @@
 1.Po pierwsze obsługa załóg a co za tym idzie utworzenie roli pilota.
  - Tworzenie, Wyświetlanie, Edytowanie i Usuwanie załóg. + zrobione
 2.Obsługa lotów. Tu trochę bardziej skomplikowane to będzie...
+ - Tworzenie, Wyświetlanie, Edytowanie i Usuwanie lotów.
 3. ...Bo trzeba będzie też obsługiwać rezerwacje klientów.
 
 Załoga to grup
@@ -121,6 +122,66 @@ Załoga to grup
                     </table>
                 </div>
 
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    Create Flight
+                </mat-expansion-panel-header>
+
+                <mat-form-field>
+                    <mat-label>Flight Number</mat-label>
+                    <input matInput [(ngModel)]="newFlight.flightNumber" required #flightNumber="ngModel">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Starting Airport Name</mat-label>
+                    <input matInput [(ngModel)]="newFlight.startingAirportName" required #startingAirportName="ngModel">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Destination Airport name</mat-label>
+                    <input matInput [(ngModel)]="newFlight.destinationAirportName" required #destinationAirportName="ngModel">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Flight Date</mat-label>
+                    <input matInput [matDatepicker]="picker" required [value]="newFlight.flightDate">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Takeoff Hour</mat-label>
+                    <input matInput [ngxTimepicker]="picker2" required [format]="24" [(ngModel)]="newFlight.takeoffHour">
+                    <ngx-material-timepicker #picker2></ngx-material-timepicker>
+                </mat-form-field>
+                
+                <mat-form-field>
+                    <mat-label>Landing Hour</mat-label>
+                    <input matInput [ngxTimepicker]="picker3" required [format]="24" [(ngModel)]="newFlight.landingHour">
+                <ngx-material-timepicker #picker3></ngx-material-timepicker>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Plane Type</mat-label>
+                    <mat-select 
+                    [(ngModel)]="newFlight.planeType" 
+                    name="planeType" 
+                    required
+                    #planeType="ngModel"
+                    >
+                        <mat-option *ngFor="let planeType of planeTypes" [value]="planeType.value">
+                            {{planeType.value}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Total Seats</mat-label>
+                    <input type="number" matInput [(ngModel)]="newFlight.totalSeats" required #totalSeats="ngModel">
+                </mat-form-field>
+
+                <button mat-raised-button color="primary" (click)="onClickCreateFlight()">Create</button>
             </mat-expansion-panel>
         </mat-accordion>
     </div>

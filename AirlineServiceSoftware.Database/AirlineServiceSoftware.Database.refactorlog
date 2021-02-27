@@ -21,4 +21,74 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="CaptainID" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="b57e1d8a-3727-4f18-86fb-120bd2853373" ChangeDateTime="02/27/2021 12:11:41">
+    <Property Name="ElementName" Value="[dbo].[Flight].[StartingAirport]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Flight]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="StartingAirportName" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="9da051e4-e7ea-4708-9794-45fba2197719" ChangeDateTime="02/27/2021 12:11:43">
+    <Property Name="ElementName" Value="[dbo].[Flight].[DestinationAirport]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Flight]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DestinationAirportName" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="1509e558-7b3e-48e5-8536-52fc054dfb61" ChangeDateTime="02/27/2021 12:11:47">
+    <Property Name="ElementName" Value="[dbo].[Flight].[FinalAirport]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Flight]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="FinalAirportName" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="7258be5f-a999-41b6-a1fe-ffcf1e2e5c0b" ChangeDateTime="02/27/2021 12:12:29">
+    <Property Name="ElementName" Value="[dbo].[Flight].[Takeoff]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Flight]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="TakeoffHour" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="bd6e4f9f-a1f2-412d-99f3-3a4529c9c57e" ChangeDateTime="02/27/2021 12:12:59">
+    <Property Name="ElementName" Value="[dbo].[Flight].[IsApproved]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Flight]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="PlaneType" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="c89ae468-50ea-4f37-acd5-233e6af69024" ChangeDateTime="02/27/2021 12:13:02">
+    <Property Name="ElementName" Value="[dbo].[Flight].[IsCompleted]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Flight]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="IsApproved" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="b07f7943-9ce6-4865-b696-020822e48603" ChangeDateTime="02/27/2021 12:17:17">
+    <Property Name="ElementName" Value="[dbo].[Flight].[CrewId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Flight]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CrewID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="e15b6400-9b0d-46c0-a43e-4c831c86d56e" ChangeDateTime="02/27/2021 12:25:14">
+    <Property Name="ElementName" Value="[dbo].[Flight].[IsApproved]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Flight]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="TotalSeats" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="3b1a3661-faec-45c6-9541-b4f284d4b5bd" ChangeDateTime="02/27/2021 12:25:17">
+    <Property Name="ElementName" Value="[dbo].[Flight].[IsCompleted]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Flight]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SeatsRemaining" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="318c3f40-48e8-4587-af56-5cb32616ee70" ChangeDateTime="02/27/2021 12:46:12">
+    <Property Name="ElementName" Value="[dbo].[Flights].[SeatsRemaining]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Flights]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="RemainingSeats" />
+  </Operation>
 </Operations>
