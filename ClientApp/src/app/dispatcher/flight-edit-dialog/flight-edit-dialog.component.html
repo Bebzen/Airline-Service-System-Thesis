@@ -1,0 +1,67 @@
+<mat-form-field>
+    <mat-label>Flight Number</mat-label>
+    <input matInput [(ngModel)]="data.flight.flightNumber" required #flightNumber="ngModel">
+</mat-form-field>
+
+<mat-form-field>
+    <mat-label>Crew</mat-label>
+    <mat-select 
+    [(ngModel)]="data.flight.crew" 
+    required
+    [compareWith]="crewComparisonFunction"
+    >
+        <mat-option *ngFor="let crew of data.crews" [value]="crew">
+            {{crew.crewName}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+
+<mat-form-field>
+    <mat-label>Starting Airport Name</mat-label>
+    <input matInput [(ngModel)]="data.flight.startingAirportName" required #startingAirportName="ngModel">
+</mat-form-field>
+
+<mat-form-field>
+    <mat-label>Destination Airport name</mat-label>
+    <input matInput [(ngModel)]="data.flight.destinationAirportName" required #destinationAirportName="ngModel">
+</mat-form-field>
+
+<mat-form-field>
+    <mat-label>Flight Date</mat-label>
+    <input matInput [matDatepicker]="picker" required [value]="data.flight.flightDate">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+
+<mat-form-field>
+    <mat-label>Takeoff Hour</mat-label>
+    <input matInput [ngxTimepicker]="picker2" required [format]="24" [(ngModel)]="data.flight.takeoffHour">
+    <ngx-material-timepicker #picker2></ngx-material-timepicker>
+</mat-form-field>
+
+<mat-form-field>
+    <mat-label>Landing Hour</mat-label>
+    <input matInput [ngxTimepicker]="picker3" required [format]="24" [(ngModel)]="data.flight.landingHour">
+<ngx-material-timepicker #picker3></ngx-material-timepicker>
+</mat-form-field>
+
+<mat-form-field>
+    <mat-label>Plane Type</mat-label>
+    <mat-select 
+    [(ngModel)]="data.flight.planeType" 
+    name="planeType" 
+    required
+    #planeType="ngModel"
+    >
+        <mat-option *ngFor="let planeType of planeTypes" [value]="planeType.value">
+            {{planeType.value}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+
+<mat-form-field>
+    <mat-label>Total Seats</mat-label>
+    <input type="number" matInput [(ngModel)]="data.flight.totalSeats" required #totalSeats="ngModel">
+</mat-form-field>
+
+<button mat-raised-button color="primary" (click)="onClickEditFlight(data.flight)">Edit</button>
