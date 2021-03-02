@@ -39,6 +39,7 @@ export class DispatcherService {
     }
 
     editFlight(flight: IFlight) {
+        console.log(flight);
         return this.http.post<IFlight>(`${environment.apiUrl}Flights/EditFlight`, flight);
     }
 

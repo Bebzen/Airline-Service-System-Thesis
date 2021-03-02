@@ -5,10 +5,15 @@ import { AppRoutingModule } from '../app-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { CrewEditDialogComponent } from './crew-edit-dialog/crew-edit-dialog.component';
 import { DispatcherComponent } from './dispatcher.component';
+import { FlightEditDialogComponent } from './flight-edit-dialog/flight-edit-dialog.component';
 import { DispatcherService } from './services/dispatcher.service';
 
 @NgModule({
-    declarations: [DispatcherComponent, CrewEditDialogComponent],
+    declarations: [
+        DispatcherComponent,
+        CrewEditDialogComponent,
+        FlightEditDialogComponent
+    ],
     imports: [
         SharedModule,
         AppRoutingModule,
@@ -17,6 +22,9 @@ import { DispatcherService } from './services/dispatcher.service';
         BrowserModule
     ],
     providers: [DispatcherService],
-    entryComponents: [CrewEditDialogComponent]
+    entryComponents: [
+        CrewEditDialogComponent,
+        FlightEditDialogComponent
+    ]
 })
 export class DispatcherModule { }

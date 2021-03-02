@@ -17,6 +17,12 @@ code {
 .example-spacer {
   flex: 1 1 auto;
 }
+.timepicker-overlay {
+  z-index: 10000000 !important;
+}
 
+.timepicker-backdrop-overlay {
+  z-index: 10000000 !important;
+}
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

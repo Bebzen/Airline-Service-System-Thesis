@@ -85,6 +85,7 @@ namespace AirlineServiceSoftware.DataAccess
                     conn.Open();
 
                     var parameters = new DynamicParameters();
+                    parameters.Add("@Id", request.Id);
                     parameters.Add("@CrewId", request.Crew.Id);
                     parameters.Add("@FlightNumber", request.FlightNumber);
                     parameters.Add("@StartingAirportName", request.StartingAirportName);
@@ -114,13 +115,13 @@ namespace AirlineServiceSoftware.DataAccess
             await using (var conn = new SqlConnection(_connectionString))
             {
                 conn.Open();
-
+                
                 var result = conn.Query<FlightResponse>("GetAllFlights", commandType: CommandType.StoredProcedure);
                 List<Flight> list = new List<Flight>();
 
                 foreach (var flight in result)
                 {
-                    
+
                     var parameters = new DynamicParameters();
                     parameters.Add("@Id", flight.CrewId);
                     var crews = conn.Query<CrewResponse>("GetCrewById", parameters, commandType: CommandType.StoredProcedure);
@@ -160,6 +161,8 @@ namespace AirlineServiceSoftware.DataAccess
                         IsApproved = flight.IsApproved,
                         IsCompleted = flight.IsCompleted
                     };
+                    newFlight.TakeoffHour = newFlight.TakeoffHour.Substring(0, 5);
+                    newFlight.LandingHour = newFlight.LandingHour.Substring(0, 5);
                     list.Add(newFlight);
                 }
 

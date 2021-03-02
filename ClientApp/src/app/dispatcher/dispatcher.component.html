@@ -134,6 +134,18 @@ Załoga to grup
                 </mat-form-field>
 
                 <mat-form-field>
+                    <mat-label>Crew</mat-label>
+                    <mat-select 
+                    [(ngModel)]="newFlight.crew" 
+                    required
+                    >
+                        <mat-option *ngFor="let crew of crews" [value]="crew">
+                            {{crew.crewName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field>
                     <mat-label>Starting Airport Name</mat-label>
                     <input matInput [(ngModel)]="newFlight.startingAirportName" required #startingAirportName="ngModel">
                 </mat-form-field>
@@ -182,6 +194,56 @@ Załoga to grup
                 </mat-form-field>
 
                 <button mat-raised-button color="primary" (click)="onClickCreateFlight()">Create</button>
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    View all flights
+                </mat-expansion-panel-header>
+
+                <div class="col-md-4">
+                    <mat-form-field>
+                        <input matInput [(ngModel)]="flightFilter" placeholder="Filter">
+                    </mat-form-field>
+                    <button mat-raised-button color="primary" id="filterButton" style="position: absolute; right: 0;" (click)="onClickFilterFlights()">Filter</button>
+                </div>
+                <div class="table-responsive col-md-12 mb-4">
+                    <table class="table table-bordered" id="dataTable">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Crew Name</th>
+                                <th>Flight Number</th>
+                                <th>Starting Airport Name</th>
+                                <th>Destination Airport Name</th>
+                                <th>Flight Date</th>
+                                <th>Status</th>
+                                <th>Edit</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr id="CrewsRow_{{flight.id}}" *ngFor="let flight of filteredFlights">
+                                <td>{{flight.id}}</td>
+                                <td>{{flight.crew.crewName}}</td>
+                                <td>{{flight.flightNumber}}</td>
+                                <td>{{flight.startingAirportName}}</td>
+                                <td>{{flight.destinationAirportName}}</td>
+                                <td>{{flight.flightDate | date }}</td>
+                                <td>
+                                    <mat-icon *ngIf="!flight.isApproved && !flight.isCompleted">pause</mat-icon>
+                                    <mat-icon *ngIf="flight.isApproved && !flight.isCompleted">play_arrow</mat-icon>
+                                    <mat-icon *ngIf="flight.isApproved && flight.isCompleted">done</mat-icon>
+                                </td>
+                                <td>
+                                    <a class="btn btn-success btn-circle btn-sm" (click)="onClickEditFlight(flight)">Edit</a>
+                                </td>
+                                <td>
+                                    <a class="btn btn-success btn-circle btn-sm" (click)="onClickDeleteFlight(flight)">Delete</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </mat-expansion-panel>
         </mat-accordion>
     </div>

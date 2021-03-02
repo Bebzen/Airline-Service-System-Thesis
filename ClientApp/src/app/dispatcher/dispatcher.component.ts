@@ -5,6 +5,7 @@ import { Moment } from 'moment';
 import { UserEditDialogComponent } from '../admin/user-edit-dialog/user-edit-dialog.component';
 import { IUser } from '../login/interfaces/iUser';
 import { CrewEditDialogComponent } from './crew-edit-dialog/crew-edit-dialog.component';
+import { FlightEditDialogComponent } from './flight-edit-dialog/flight-edit-dialog.component';
 import { ICrew } from './interfaces/iCrew';
 import { IFlight } from './interfaces/iFlight';
 import { PlaneType } from './interfaces/PlaneType';
@@ -28,7 +29,7 @@ export class DispatcherComponent implements OnInit {
     newCrew: ICrew;
     crewFilter: string;
     newFlight: IFlight;
-
+    flightFilter: string;
     planeTypes;
 
     newFlightDate: Moment;
@@ -39,6 +40,8 @@ export class DispatcherComponent implements OnInit {
     filteredCrews: ICrew[] = [];
     pilots: IUser[] = [];
     filteredPilots: IUser[] = [];
+    flights: IFlight[] = [];
+    filteredFlights: IFlight[] = [];
 
     constructor(private dispatcherService: DispatcherService, public dialog: MatDialog) {
         this.newCrew = {} as ICrew;
@@ -58,6 +61,11 @@ export class DispatcherComponent implements OnInit {
         this.dispatcherService.getAllCrews().subscribe(crews => {
             this.crews = crews;
             this.filteredCrews = crews;
+        });
+        this.dispatcherService.getAllFlights().subscribe(flights => {
+            this.flights = flights;
+            this.filteredFlights = flights;
+            console.log(flights);
         });
     }
 
@@ -83,6 +91,26 @@ export class DispatcherComponent implements OnInit {
     }
     onClickFilter() {
         this.filteredCrews = this.performCrewFilter(this.crewFilter);
+    }
+
+    onClickFilterFlights() {
+        this.filteredFlights = this.performFlightFilter(this.flightFilter);
+    }
+
+    performFlightFilter(filterFlight: string) {
+        if (filterFlight == null) {
+            filterFlight = '';
+        }
+        filterFlight = filterFlight.toLocaleLowerCase();
+        function filterResults(flight: IFlight) {
+            return (
+                (flight.flightNumber.toLocaleLowerCase().indexOf(filterFlight) !== -1) ||
+                (flight.crew.crewName.toLocaleLowerCase().indexOf(filterFlight) !== -1) ||
+                (flight.flightDate.toString().indexOf(filterFlight) !== -1)
+            );
+        }
+        const filtered = this.flights.filter(filterResults);
+        return filtered;
     }
 
     selectPilotCheck(): boolean {
@@ -146,5 +174,28 @@ export class DispatcherComponent implements OnInit {
         this.newFlight.isApproved = false;
         this.newFlight.isCompleted = false;
         this.newFlight.remainingSeats = this.newFlight.totalSeats;
+        this.dispatcherService.createFlight(this.newFlight).subscribe(result => {
+            this.ngOnInit();
+        },
+        error => {
+
+        });
+    }
+
+    onClickEditFlight(flight: IFlight){
+        this.dialog.open(FlightEditDialogComponent,
+            {
+                width: '50%',
+                data: { flight: flight, crews: this.crews}
+            });
+    }
+
+    onClickDeleteFlight(flight: IFlight){
+        this.dispatcherService.deleteFlight(flight.id).subscribe(result => {
+            this.ngOnInit();
+        },
+        error => {
+
+        });
     }
 }
