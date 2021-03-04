@@ -1,9 +1,9 @@
 <mat-form-field>
     <mat-label>Flight Number</mat-label>
-    <input matInput [(ngModel)]="data.flight.flightNumber" required #flightNumber="ngModel">
+    <input [disabled]="data.isPilot" matInput [(ngModel)]="data.flight.flightNumber" required #flightNumber="ngModel">
 </mat-form-field>
 
-<mat-form-field>
+<mat-form-field *ngIf="!data.isPilot">
     <mat-label>Crew</mat-label>
     <mat-select 
     [(ngModel)]="data.flight.crew" 
@@ -18,7 +18,7 @@
 
 <mat-form-field>
     <mat-label>Starting Airport Name</mat-label>
-    <input matInput [(ngModel)]="data.flight.startingAirportName" required #startingAirportName="ngModel">
+    <input [disabled]="data.isPilot" matInput [(ngModel)]="data.flight.startingAirportName" required #startingAirportName="ngModel">
 </mat-form-field>
 
 <mat-form-field>
@@ -28,7 +28,7 @@
 
 <mat-form-field>
     <mat-label>Flight Date</mat-label>
-    <input matInput [matDatepicker]="picker" required [value]="data.flight.flightDate">
+    <input [disabled]="data.isPilot" matInput [matDatepicker]="picker" required [value]="data.flight.flightDate">
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
 </mat-form-field>
@@ -49,6 +49,7 @@
     <mat-label>Plane Type</mat-label>
     <mat-select 
     [(ngModel)]="data.flight.planeType" 
+    [disabled]="data.isPilot"
     name="planeType" 
     required
     #planeType="ngModel"
@@ -61,7 +62,7 @@
 
 <mat-form-field>
     <mat-label>Total Seats</mat-label>
-    <input type="number" matInput [(ngModel)]="data.flight.totalSeats" required #totalSeats="ngModel">
+    <input [disabled]="data.isPilot" type="number" matInput [(ngModel)]="data.flight.totalSeats" required #totalSeats="ngModel">
 </mat-form-field>
 
 <button mat-raised-button color="primary" (click)="onClickEditFlight(data.flight)">Edit</button>

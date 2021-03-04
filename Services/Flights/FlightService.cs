@@ -71,5 +71,29 @@ namespace AirlineServiceSoftware.Services.Flights
             var flights = _mediator.Send(new GetAllFlightsRequest()).Result;
             return flights;
         }
+
+        public IEnumerable<Flight> GetPilotFlights(int Id)
+        {
+            var flights = _mediator.Send(new GetPilotFlightsRequest()
+            {
+                Id = Id
+            }).Result;
+
+            return flights;
+        }
+
+        public bool EditFlightStatus(Flight editFlight)
+        {
+            var result = _mediator.Send(new EditFlightStatusRequest()
+            {
+                Id = editFlight.Id,
+                DestinationAirportName = editFlight.DestinationAirportName,
+                TakeoffHour = editFlight.TakeoffHour,
+                LandingHour = editFlight.LandingHour,
+                IsCompleted = editFlight.IsCompleted
+            }).Result;
+
+            return result;
+        }
     }
 }

@@ -6,6 +6,7 @@ import { AuthGuard } from './guards/auth-guard.service';
 import { HomeComponent } from './home/home.component';
 import { Role } from './login/interfaces/Role';
 import { LoginComponent } from './login/login.component';
+import { PilotComponent } from './pilot/pilot.component';
 
 const routes: Routes = [
     {
@@ -24,6 +25,12 @@ const routes: Routes = [
         component: DispatcherComponent,
         canActivate: [AuthGuard],
         data: {roles: [Role.Admin, Role.Dispatcher]}
+    },
+    {
+        path: 'pilot',
+        component: PilotComponent,
+        canActivate: [AuthGuard],
+        data: {roles: [Role.Admin, Role.Pilot]}
     },
     {
         path: 'login',

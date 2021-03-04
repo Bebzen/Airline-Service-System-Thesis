@@ -62,5 +62,26 @@ namespace AirlineServiceSoftware.Controllers
             return Ok(result);
 
         }
+
+        [Authorize(Roles = "Admin, Pilot")]
+        [HttpGet("GetPilotFlights/{Id}")]
+        public IActionResult GetPilotFlights(int Id)
+        {
+            var flights = _flightService.GetPilotFlights(Id);
+            if (flights == null) return NotFound();
+            return Ok(flights);
+        }
+
+        [Authorize(Roles = "Admin, Pilot")]
+        [HttpPost("EditFlightStatus")]
+        public IActionResult EditFlightStatus([FromBody] Flight flightData)
+        {
+            var result = _flightService.EditFlightStatus(flightData);
+            if (!result)
+            {
+                return BadRequest(new { message = "Flight was not modified." });
+            }
+            return Ok(result);
+        }
     }
 }
