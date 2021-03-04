@@ -7,6 +7,8 @@ using System.Collections.Immutable;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace AirlineServiceSoftware.DataAccess
@@ -168,6 +170,51 @@ namespace AirlineServiceSoftware.DataAccess
 
                 IEnumerable<Flight> flights = list;
                 return flights;
+            }
+        }
+
+        public async Task<IEnumerable<Flight>> GetPilotFlights(GetPilotFlightsRequest request)
+        {
+            await using (var conn = new SqlConnection(_connectionString))
+            {
+                conn.Open();
+                var parameters = new DynamicParameters();
+                parameters.Add("@Id", request.Id);
+
+                var result = conn.Query<Flight>("GetFlightsByPilotId", parameters, commandType: CommandType.StoredProcedure);
+                foreach (var flight in result)
+                {
+                    flight.LandingHour = flight.LandingHour.Substring(0, 5);
+                    flight.TakeoffHour = flight.TakeoffHour.Substring(0, 5);
+                }
+
+                return result;
+            }
+        }
+
+        public async Task<bool> EditFlightStatus(EditFlightStatusRequest request)
+        {
+            try
+            {
+                await using (var conn = new SqlConnection(_connectionString))
+                {
+                    conn.Open();
+
+                    var parameters = new DynamicParameters();
+                    parameters.Add("@Id", request.Id);
+                    parameters.Add("@DestinationAirportName", request.DestinationAirportName);
+                    parameters.Add("@TakeoffHour", request.TakeoffHour);
+                    parameters.Add("@LandingHour", request.LandingHour);
+                    parameters.Add("@IsCompleted", request.IsCompleted);
+
+                    conn.Query("EditFlightStatus", parameters, commandType: CommandType.StoredProcedure);
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return false;
             }
         }
     }

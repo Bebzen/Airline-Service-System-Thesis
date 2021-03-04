@@ -23,6 +23,10 @@ export class AppComponent {
     return this.user && this.user.role === Role.Dispatcher;
   }
 
+  get isPilot() {
+    return this.user && this.user.role === Role.Pilot;
+  }
+
   logout() {
     this.authenticationService.logout();
   }

@@ -43,7 +43,10 @@ export class DispatcherComponent implements OnInit {
     flights: IFlight[] = [];
     filteredFlights: IFlight[] = [];
 
-    constructor(private dispatcherService: DispatcherService, public dialog: MatDialog) {
+    constructor(
+        private dispatcherService: DispatcherService,
+        public dialog: MatDialog
+        ) {
         this.newCrew = {} as ICrew;
         this.newFlight = {} as IFlight;
         this.crewFilter = '';
@@ -65,7 +68,6 @@ export class DispatcherComponent implements OnInit {
         this.dispatcherService.getAllFlights().subscribe(flights => {
             this.flights = flights;
             this.filteredFlights = flights;
-            console.log(flights);
         });
     }
 
@@ -182,15 +184,15 @@ export class DispatcherComponent implements OnInit {
         });
     }
 
-    onClickEditFlight(flight: IFlight){
+    onClickEditFlight(flight: IFlight) {
         this.dialog.open(FlightEditDialogComponent,
             {
                 width: '50%',
-                data: { flight: flight, crews: this.crews}
+                data: { flight: flight, crews: this.crews, isPilot: false}
             });
     }
 
-    onClickDeleteFlight(flight: IFlight){
+    onClickDeleteFlight(flight: IFlight) {
         this.dispatcherService.deleteFlight(flight.id).subscribe(result => {
             this.ngOnInit();
         },

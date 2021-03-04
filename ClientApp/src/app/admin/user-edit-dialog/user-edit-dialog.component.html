@@ -54,7 +54,7 @@
     <input [disabled]="editingDisabled" matInput [(ngModel)]="data.user.documentId">
 </mat-form-field>
 <br>
-<button *ngIf="!editingDisabled" mat-raised-button color="primary" (click)="onClickEditUser(data)">Submit</button>
+<button *ngIf="!editingDisabled" mat-raised-button color="primary" (click)="onClickEditUser(data.user)">Submit</button>
 <br>
 <br>
 <div *ngIf="error" class="alert alert-danger">{{error}}</div>

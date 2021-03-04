@@ -18,7 +18,7 @@ export class FlightEditDialogComponent {
     constructor (
         private dispatcherService: DispatcherService,
         public dialogRef: MatDialogRef<FlightEditDialogComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: {flight: IFlight, crews: ICrew[]}){
+        @Inject(MAT_DIALOG_DATA) public data: {flight: IFlight, crews: ICrew[], isPilot: boolean}) {
             this.planeTypes = this.enumSelector(PlaneType);
         }
 
@@ -38,7 +38,8 @@ export class FlightEditDialogComponent {
                 }
             );
         }
+
         public crewComparisonFunction = function( option, value ): boolean {
             return option.id === value.id;
-        }
+        };
 }
