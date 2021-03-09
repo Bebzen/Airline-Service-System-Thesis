@@ -83,5 +83,13 @@ namespace AirlineServiceSoftware.Controllers
             }
             return Ok(result);
         }
+
+        [HttpPost("SearchFlights")]
+        public IActionResult SearchFlights([FromBody] SearchParameters searchParameters)
+        {
+            searchParameters.DepartureDate = searchParameters.DepartureDate.AddDays(1);
+            var flights = _flightService.SearchFlights(searchParameters);
+            return Ok(flights);
+        }
     }
 }

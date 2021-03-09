@@ -19,6 +19,7 @@ import { SharedModule } from './shared/shared.module';
 import { AdminModule } from './admin/admin.module';
 import { DispatcherModule } from './dispatcher/dispatcher.module';
 import { PilotModule } from './pilot/pilot.module';
+import { CustomerModule } from './customer/customer.module';
 
 export function tokenGetter() {
   return localStorage.getItem('jwt');
@@ -40,7 +41,8 @@ export function tokenGetter() {
     SharedModule,
     AdminModule,
     DispatcherModule,
-    PilotModule
+    PilotModule,
+    CustomerModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

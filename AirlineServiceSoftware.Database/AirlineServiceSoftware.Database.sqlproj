@@ -85,6 +85,7 @@
     <Build Include="dbo\Programmability\Stored Procedures\GetCrewById.sql" />
     <Build Include="dbo\Programmability\Stored Procedures\EditFlightStatus.sql" />
     <Build Include="dbo\Programmability\Stored Procedures\GetFlightsByPilotId.sql" />
+    <Build Include="dbo\Programmability\Stored Procedures\SearchFlights.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="AirlineServiceSoftware.Database.refactorlog" />

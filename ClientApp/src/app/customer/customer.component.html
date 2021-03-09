@@ -1,0 +1,53 @@
+<div class="card mt-4">
+    <h4 class="card-header">Customer</h4>
+    <div class="card-body">
+
+        <mat-form-field>
+            <mat-label>Origin</mat-label>
+            <input matInput [(ngModel)]="newFlightSearch.originAirport" required #crewName="ngModel">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Destination</mat-label>
+            <input matInput [(ngModel)]="newFlightSearch.destinationAirport" required #crewName="ngModel">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Departure Date</mat-label>
+            <input matInput [matDatepicker]="picker" required [(ngModel)]="newFlightSearch.departureDate">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" (click)="onClickFindFlights()">Search</button>
+    </div>
+
+    <div class="table-responsive col-md-12 mb-4" *ngIf="foundFlights">
+        <table class="table table-bordered" id="dataTable">
+            <thead>
+                <tr>
+                    <th>Flight Number</th>
+                    <th>Starting Airport Name</th>
+                    <th>Destination Airport Name</th>
+                    <th>Flight Date</th>
+                    <th>Takeoff Hour</th>
+                    <th>Landing Hour</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr id="CrewsRow_{{flight.id}}" *ngFor="let flight of foundFlights">
+                    <td>{{flight.flightNumber}}</td>
+                    <td>{{flight.startingAirportName}}</td>
+                    <td>{{flight.destinationAirportName}}</td>
+                    <td>{{flight.flightDate | date}}</td>
+                    <td>{{flight.takeoffHour}}</td>
+                    <td>{{flight.landingHour}}</td>
+                    <td>
+                        <a class="btn btn-success btn-circle btn-sm" (click)="onClickCheckUserInfo()">Buy</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
