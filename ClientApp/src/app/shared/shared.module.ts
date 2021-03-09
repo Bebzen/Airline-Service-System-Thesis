@@ -3,7 +3,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule, MatCardModule, MatCheckboxModule, MatDatepickerModule, MatDialogModule, MatExpansionModule, MatFormFieldModule, MatIconModule,
     MatInputModule, MatSelectModule, MatToolbarModule } from '@angular/material';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
-import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { MatMomentDateModule, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 
 @NgModule ({
     declarations: [
@@ -34,6 +34,9 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
         MatMomentDateModule,
         MatCheckboxModule,
         NgxMaterialTimepickerModule
+    ],
+    providers: [
+        {provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: {useUTC: true}}
     ]
 })
 

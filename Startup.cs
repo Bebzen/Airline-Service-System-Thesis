@@ -14,6 +14,7 @@ using AirlineServiceSoftware.Services.Login;
 using MediatR;
 using AirlineServiceSoftware.Services.Crews;
 using AirlineServiceSoftware.Services.Flights;
+using Stripe;
 
 namespace AirlineServiceSoftware
 {
@@ -77,6 +78,7 @@ namespace AirlineServiceSoftware
             });
 
             services.AddControllersWithViews();
+
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -97,6 +99,9 @@ namespace AirlineServiceSoftware
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            StripeConfiguration.ApiKey =
+                "sk_test_51IRzJIEL831lK8oMzrNMzRNhbgKzQ4y7TzzWEqVYjjMzh6RJL7SslL8KnO1Wf0iymaFfuxAtjfP264u3QqLTuVt700xgRMLCaW";
 
             app.UseHttpsRedirection();
 

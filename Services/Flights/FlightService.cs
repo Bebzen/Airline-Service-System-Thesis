@@ -95,5 +95,17 @@ namespace AirlineServiceSoftware.Services.Flights
 
             return result;
         }
+
+        public IEnumerable<Flight> SearchFlights(SearchParameters searchParameters)
+        {
+            var flights = _mediator.Send(new SearchFlightsRequest()
+            {
+                OriginAirport = searchParameters.OriginAirport,
+                DestinationAirport = searchParameters.DestinationAirport,
+                DepartureDate = searchParameters.DepartureDate
+            }).Result;
+
+            return flights;
+        }
     }
 }

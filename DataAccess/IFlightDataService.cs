@@ -13,5 +13,6 @@ namespace AirlineServiceSoftware.DataAccess
         Task<bool> DeleteFlight(DeleteFlightRequest request);
         Task<IEnumerable<Flight>> GetPilotFlights(GetPilotFlightsRequest request);
         Task<bool> EditFlightStatus(EditFlightStatusRequest request);
+        Task<IEnumerable<Flight>> SearchFlights(SearchFlightsRequest request);
     }
 }

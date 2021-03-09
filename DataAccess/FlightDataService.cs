@@ -3,12 +3,9 @@ using AirlineServiceSoftware.Mediators.MediatorsRequests.Flights;
 using Dapper;
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace AirlineServiceSoftware.DataAccess
@@ -215,6 +212,22 @@ namespace AirlineServiceSoftware.DataAccess
             {
                 Console.WriteLine(ex);
                 return false;
+            }
+        }
+
+        public async Task<IEnumerable<Flight>> SearchFlights(SearchFlightsRequest request)
+        {
+            await using (var conn = new SqlConnection(_connectionString))
+            {
+                conn.Open();
+
+                var parameters = new DynamicParameters();
+                parameters.Add("@OriginAirport", request.OriginAirport);
+                parameters.Add("@DestinationAirport", request.DestinationAirport);
+                parameters.Add("@DepartureDate", request.DepartureDate);
+
+                var result = conn.Query<Flight>("SearchFlights", parameters, commandType: CommandType.StoredProcedure);
+                return result;
             }
         }
     }

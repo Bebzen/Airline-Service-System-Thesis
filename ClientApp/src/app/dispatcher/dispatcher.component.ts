@@ -10,7 +10,7 @@ import { ICrew } from './interfaces/iCrew';
 import { IFlight } from './interfaces/iFlight';
 import { PlaneType } from './interfaces/PlaneType';
 import { DispatcherService } from './services/dispatcher.service';
-
+/* tslint:disable: deprecation */
 @Component({
     templateUrl: 'dispatcher.component.html',
     styleUrls: ['./dispatcher.component.scss']
@@ -55,6 +55,7 @@ export class DispatcherComponent implements OnInit {
     }
 
     ngOnInit(): void {
+
         this.dispatcherService.getAllPilots().subscribe(users => {
             this.pilots = users;
         },

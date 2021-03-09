@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './admin/admin.component';
+import { CustomerComponent } from './customer/customer.component';
 import { DispatcherComponent } from './dispatcher/dispatcher.component';
 import { AuthGuard } from './guards/auth-guard.service';
 import { HomeComponent } from './home/home.component';
@@ -31,6 +32,11 @@ const routes: Routes = [
         component: PilotComponent,
         canActivate: [AuthGuard],
         data: {roles: [Role.Admin, Role.Pilot]}
+    },
+    {
+        path: 'customer',
+        component: CustomerComponent,
+        canActivate: [AuthGuard]
     },
     {
         path: 'login',
