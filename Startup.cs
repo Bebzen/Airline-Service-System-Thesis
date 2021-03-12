@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using System.Threading;
 using AirlineServiceSoftware.DataAccess;
 using AirlineServiceSoftware.Helpers;
 using AirlineServiceSoftware.Services;
@@ -14,7 +15,7 @@ using AirlineServiceSoftware.Services.Login;
 using MediatR;
 using AirlineServiceSoftware.Services.Crews;
 using AirlineServiceSoftware.Services.Flights;
-using Stripe;
+using AirlineServiceSoftware.Services.Reservations;
 
 namespace AirlineServiceSoftware
 {
@@ -47,9 +48,12 @@ namespace AirlineServiceSoftware
                 new CrewDataService(Configuration.GetConnectionString("Database")));
             services.AddScoped<IFlightDataService, FlightDataService>(ctor =>
                 new FlightDataService(Configuration.GetConnectionString("Database")));
+            services.AddScoped<IReservationDataService, ReservationDataService>(ctor =>
+                new ReservationDataService(Configuration.GetConnectionString("Database")));
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ICrewService, CrewService>();
             services.AddScoped<IFlightService, FlightService>();
+            services.AddScoped<IReservationService, ReservationService>();
             
 
             // configuring authentication
@@ -99,9 +103,6 @@ namespace AirlineServiceSoftware
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
-            StripeConfiguration.ApiKey =
-                "sk_test_51IRzJIEL831lK8oMzrNMzRNhbgKzQ4y7TzzWEqVYjjMzh6RJL7SslL8KnO1Wf0iymaFfuxAtjfP264u3QqLTuVt700xgRMLCaW";
 
             app.UseHttpsRedirection();
 

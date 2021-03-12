@@ -5,6 +5,7 @@ import { AppRoutingModule } from '../app-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { CrewEditDialogComponent } from './crew-edit-dialog/crew-edit-dialog.component';
 import { DispatcherComponent } from './dispatcher.component';
+import { EditReservationsDialogComponent } from './edit-reservations-dialog/edit-reservations-dialog.component';
 import { FlightEditDialogComponent } from './flight-edit-dialog/flight-edit-dialog.component';
 import { DispatcherService } from './services/dispatcher.service';
 
@@ -12,7 +13,8 @@ import { DispatcherService } from './services/dispatcher.service';
     declarations: [
         DispatcherComponent,
         CrewEditDialogComponent,
-        FlightEditDialogComponent
+        FlightEditDialogComponent,
+        EditReservationsDialogComponent
     ],
     imports: [
         SharedModule,
@@ -24,7 +26,8 @@ import { DispatcherService } from './services/dispatcher.service';
     providers: [DispatcherService],
     entryComponents: [
         CrewEditDialogComponent,
-        FlightEditDialogComponent
+        FlightEditDialogComponent,
+        EditReservationsDialogComponent
     ]
 })
 export class DispatcherModule { }

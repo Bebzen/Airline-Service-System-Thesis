@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { IReservationRequest } from 'src/app/checkout/interfaces/IReservationRequest';
 import { IUser } from 'src/app/login/interfaces/iUser';
 import { environment } from 'src/environments/environment';
 import { ICrew } from '../interfaces/iCrew';
@@ -45,5 +46,9 @@ export class DispatcherService {
 
     deleteFlight(id: number) {
         return this.http.delete<number>(`${environment.apiUrl}Flights/DeleteFlight/${id}`);
+    }
+
+    getFlightReservations(id: number) {
+        return this.http.get<IReservationRequest>(`${environment.apiUrl}Reservations/GetFlightReservations/${id}`);
     }
 }

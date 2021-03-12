@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
+import { IReservation } from '../customer/interfaces/iReservation';
 import { FlightEditDialogComponent } from '../dispatcher/flight-edit-dialog/flight-edit-dialog.component';
 import { ICrew } from '../dispatcher/interfaces/iCrew';
 import { IFlight } from '../dispatcher/interfaces/iFlight';

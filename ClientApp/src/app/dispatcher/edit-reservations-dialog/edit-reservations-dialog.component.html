@@ -1,0 +1,28 @@
+<div class="table-responsive col-md-12 mb-4" *ngIf="configuration">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Seat Number</th>
+                <th>Name</th>
+                <th>Phone Number</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let seat of reservations">
+                <td>
+                    <button mat-raised-button color="primary" (click)="onClickEditReservation(seat)">{{seat.seatNumber}}</button>
+                </td>
+                <td>
+                    {{seat.user.firstName}} {{seat.user.lastName}}
+                </td>
+                <td>
+                    {{seat.user.phoneNumber}}
+                </td>
+                <td>
+                    {{seat.user.email}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

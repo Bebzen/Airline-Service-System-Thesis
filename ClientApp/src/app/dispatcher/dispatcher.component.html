@@ -219,6 +219,7 @@ Załoga to grup
                                 <th>Status</th>
                                 <th>Edit</th>
                                 <th>Delete</th>
+                                <th>View Reservations</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -239,6 +240,9 @@ Załoga to grup
                                 </td>
                                 <td>
                                     <a class="btn btn-success btn-circle btn-sm" (click)="onClickDeleteFlight(flight)">Delete</a>
+                                </td>
+                                <td>
+                                    <a class="btn btn-success btn-circle btn-sm" (click)="onClickViewReservations(flight)">Reservations</a>
                                 </td>
                             </tr>
                         </tbody>

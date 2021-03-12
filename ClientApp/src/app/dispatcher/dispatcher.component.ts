@@ -5,6 +5,7 @@ import { Moment } from 'moment';
 import { UserEditDialogComponent } from '../admin/user-edit-dialog/user-edit-dialog.component';
 import { IUser } from '../login/interfaces/iUser';
 import { CrewEditDialogComponent } from './crew-edit-dialog/crew-edit-dialog.component';
+import { EditReservationsDialogComponent } from './edit-reservations-dialog/edit-reservations-dialog.component';
 import { FlightEditDialogComponent } from './flight-edit-dialog/flight-edit-dialog.component';
 import { ICrew } from './interfaces/iCrew';
 import { IFlight } from './interfaces/iFlight';
@@ -200,5 +201,13 @@ export class DispatcherComponent implements OnInit {
         error => {
 
         });
+    }
+
+    onClickViewReservations(flight: IFlight) {
+        this.dialog.open(EditReservationsDialogComponent,
+            {
+                width: '50%',
+                data: {flight: flight}
+            });
     }
 }

@@ -12,5 +12,6 @@ namespace AirlineServiceSoftware.Services.Flights
         IEnumerable<Flight> GetPilotFlights(int Id);
         bool EditFlightStatus(Flight editFlight);
         IEnumerable<Flight> SearchFlights(SearchParameters searchParameters);
+        Flight GetFlight(int Id);
     }
 }

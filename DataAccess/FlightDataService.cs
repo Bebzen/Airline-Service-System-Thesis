@@ -230,5 +230,19 @@ namespace AirlineServiceSoftware.DataAccess
                 return result;
             }
         }
+
+        public async Task<Flight> GetFlight(GetFlightRequest request)
+        {
+            await using (var conn = new SqlConnection(_connectionString))
+            {
+                conn.Open();
+
+                var parameters = new DynamicParameters();
+                parameters.Add("@Id", request.Id);
+
+                var result = conn.Query<Flight>("GetFlight", parameters, commandType: CommandType.StoredProcedure);
+                return result.SingleOrDefault();
+            }
+        }
     }
 }

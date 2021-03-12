@@ -23,7 +23,7 @@ namespace AirlineServiceSoftware.Controllers
             var result = _flightService.CreateFlight(flightData);
             if (!result)
             {
-                return BadRequest(new { message = "Flight was not modified." });
+                return BadRequest(new { message = "Flight was not created." });
             }
             return Ok(result);
 
@@ -64,10 +64,10 @@ namespace AirlineServiceSoftware.Controllers
         }
 
         [Authorize(Roles = "Admin, Pilot")]
-        [HttpGet("GetPilotFlights/{Id}")]
-        public IActionResult GetPilotFlights(int Id)
+        [HttpGet("GetPilotFlights/{id}")]
+        public IActionResult GetPilotFlights(int id)
         {
-            var flights = _flightService.GetPilotFlights(Id);
+            var flights = _flightService.GetPilotFlights(id);
             if (flights == null) return NotFound();
             return Ok(flights);
         }
@@ -90,6 +90,14 @@ namespace AirlineServiceSoftware.Controllers
             searchParameters.DepartureDate = searchParameters.DepartureDate.AddDays(1);
             var flights = _flightService.SearchFlights(searchParameters);
             return Ok(flights);
+        }
+
+        [HttpGet("GetFlight/{Id}")]
+        public IActionResult GetFlight(int Id)
+        {
+            var result = _flightService.GetFlight(Id);
+            if (result == null) return NotFound();
+            return Ok(result);
         }
     }
 }

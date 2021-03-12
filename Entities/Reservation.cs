@@ -4,9 +4,10 @@
     {
         public int Id { get; set; }
         public Flight Flight { get; set; }
-        public User User { get; set; }
+        public int UserId { get; set; }
         public float Price { get; set; }
         public string SeatNumber { get; set; }
-        public bool IsPaid { get; set; }
+        public string TransactionId { get; set; }
+        public bool IsValid { get; set; }
     }
 }

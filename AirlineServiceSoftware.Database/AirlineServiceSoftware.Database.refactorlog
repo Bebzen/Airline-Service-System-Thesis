@@ -91,4 +91,32 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="RemainingSeats" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="cda5f610-5907-4a4f-aaca-e92b68e6ce74" ChangeDateTime="03/11/2021 15:47:06">
+    <Property Name="ElementName" Value="[dbo].[Reservations].[IsPaid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Reservations]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="transactionId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="fcdab956-60d5-4116-bc81-c2d95d870787" ChangeDateTime="03/11/2021 16:22:50">
+    <Property Name="ElementName" Value="[dbo].[Reservations].[transactionId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Reservations]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="TransactionId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="a5da8c8c-1d90-4b48-8abf-b9bdb705e81a" ChangeDateTime="03/11/2021 16:39:59">
+    <Property Name="ElementName" Value="[dbo].[Reservations].[TransactionId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Reservations]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="TransactionID" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="644d6311-8d31-405d-817a-e74e58d852ce" ChangeDateTime="03/11/2021 17:46:38">
+    <Property Name="ElementName" Value="[dbo].[Reservations].[isValid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Reservations]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="IsValid" />
+  </Operation>
 </Operations>

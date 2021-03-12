@@ -1,7 +1,12 @@
 import { ConstantPool } from '@angular/compiler';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { IReservationRequest } from '../checkout/interfaces/IReservationRequest';
 import { IFlight } from '../dispatcher/interfaces/iFlight';
+import { IUser } from '../login/interfaces/iUser';
+import { AuthenticationService } from '../services/authentication.service';
 import { IFlightSearch } from './interfaces/iFlightSearch';
+import { IReservation } from './interfaces/iReservation';
 import { CustomerService } from './services/customer.service';
 
 @Component({
@@ -13,20 +18,35 @@ export class CustomerComponent implements OnInit {
 
     newFlightSearch: IFlightSearch;
     foundFlights: IFlight[];
+    isLoading = true;
+    user: IUser;
+    reservations: IReservation[];
+    // dodajemy gdzieś div z #paypalRef i tam wstawi się guzik. boże co za gówno.
     constructor(
-        private customerService: CustomerService
+        private router: Router,
+        private customerService: CustomerService,
+        private authenticationService: AuthenticationService
     ) {
-        this.foundFlights = {} as IFlight[];
+        this.user = this.authenticationService.userValue;
+        window.paypal = paypal;
+        this.foundFlights = [] as IFlight[];
+        this.reservations = [] as IReservation[];
         this.newFlightSearch = {} as IFlightSearch;
     }
     ngOnInit(): void {
+        this.customerService.getUserReservations(this.user.id).subscribe(reservations => {
+            this.reservations = reservations;
+        },
+        error => {
+            console.log(error);
+        });
     }
 
     onClickFindFlights() {
         console.log(this.newFlightSearch.departureDate);
-        this.customerService.searchFlights(this.newFlightSearch).subscribe(flights=>
-            {
+        this.customerService.searchFlights(this.newFlightSearch).subscribe(flights => {
                 this.foundFlights = flights;
+                this.isLoading = false;
             },
             error => {
                 console.log(error);
@@ -34,4 +54,9 @@ export class CustomerComponent implements OnInit {
 
     }
 
+    onClickCheckout(flightId: number) {
+        this.router.navigate(['/checkout', { id: flightId}]);
+    }
+
 }
+
