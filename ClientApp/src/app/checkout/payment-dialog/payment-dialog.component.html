@@ -1,0 +1,16 @@
+<h4>Flight information: </h4>
+<br>
+Flight number: {{data.flight.flightNumber}}
+<br>
+Origin airport: {{data.flight.startingAirportName}}
+<br>
+Destination airport: {{data.flight.destinationAirportName}}
+<br>
+Departure Date: {{data.flight.flightDate | date}} {{data.flight.takeoffHour}}
+<br>
+Approximate Arrival Date: {{data.flight.flightDate | date}} {{data.flight.landingHour}}
+<br>
+Price: {{paymentAmount}}
+<br>
+
+Seat: {{data.seat}}<div #paypalRef></div>

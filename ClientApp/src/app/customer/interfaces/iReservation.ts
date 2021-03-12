@@ -7,5 +7,6 @@ export interface IReservation {
     user: IUser;
     price: number;
     seatNumber: string;
-    isPaid: boolean;
+    transactionId: string;
+    isValid: boolean;
 }

@@ -1,0 +1,53 @@
+<div class="card mt-4">
+    <h4 class="card-header">Purchase Ticket</h4>
+    <div class="card-body">
+        <h5>Before proceeding further, check that your personal data is correct and not empty:</h5>
+        <br>
+        <mat-divider></mat-divider>
+        First Name: {{user.firstName}}
+        <mat-divider></mat-divider>
+        Last Name: {{user.lastName}}
+        <mat-divider></mat-divider>
+        Phone Number: {{user.phoneNumber}}
+        <mat-divider></mat-divider>
+        Email: {{user.email}}
+        <mat-divider></mat-divider>
+        Pesel: {{user.pesel}}
+        <mat-divider></mat-divider>
+        Document Number: {{user.documentId}}
+        <br>
+        <br>
+        <h5>Seats in row A and F are placed by the window.</h5>
+        <br>
+        <div class="table-responsive col-md-12 mb-4" *ngIf="configuration">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>row A</th>
+                        <th>row B</th>
+                        <th>row C</th>
+                        <th>row D</th>
+                        <th>row E</th>
+                        <th>row F</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let row of seats">
+                        <td><button *ngIf="!checkSeatValidity(row + 'A')" mat-raised-button color="primary" (click)="onClickProceedToPaypal(row + 'A')">{{row}}A</button>
+                            <button *ngIf="checkSeatValidity(row + 'A')" mat-raised-button color="warn">TAKEN</button></td>
+                        <td><button *ngIf="!checkSeatValidity(row + 'B')" mat-raised-button color="primary" (click)="onClickProceedToPaypal(row + 'B')">{{row}}B</button>
+                            <button *ngIf="checkSeatValidity(row + 'B')" mat-raised-button color="warn">TAKEN</button></td>
+                        <td><button *ngIf="!checkSeatValidity(row + 'C')" mat-raised-button color="primary" (click)="onClickProceedToPaypal(row + 'C')">{{row}}C</button>
+                            <button *ngIf="checkSeatValidity(row + 'C')" mat-raised-button color="warn">TAKEN</button></td>
+                        <td><button *ngIf="!checkSeatValidity(row + 'D')" mat-raised-button color="primary" (click)="onClickProceedToPaypal(row + 'D')">{{row}}D</button>
+                            <button *ngIf="checkSeatValidity(row + 'D')" mat-raised-button color="warn">TAKEN</button></td>
+                        <td><button *ngIf="!checkSeatValidity(row + 'E')" mat-raised-button color="primary" (click)="onClickProceedToPaypal(row + 'E')">{{row}}E</button>
+                            <button *ngIf="checkSeatValidity(row + 'E')" mat-raised-button color="warn">TAKEN</button></td>
+                        <td><button *ngIf="!checkSeatValidity(row + 'F')" mat-raised-button color="primary" (click)="onClickProceedToPaypal(row + 'F')">{{row}}F</button>
+                            <button *ngIf="checkSeatValidity(row + 'F')" mat-raised-button color="warn">TAKEN</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

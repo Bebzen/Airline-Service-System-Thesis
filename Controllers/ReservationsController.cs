@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using AirlineServiceSoftware.Entities;
+using AirlineServiceSoftware.Services.Reservations;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Stripe;
-using Stripe.Checkout;
-using SessionCreateOptions = Stripe.BillingPortal.SessionCreateOptions;
 
 namespace AirlineServiceSoftware.Controllers
 {
@@ -13,27 +10,45 @@ namespace AirlineServiceSoftware.Controllers
     [ApiController]
     public class ReservationsController : Controller
     {
-
-        public ReservationsController()
+        private readonly IReservationService _reservationService;
+        public ReservationsController(IReservationService reservationService)
         {
-
+            _reservationService = reservationService;
         }
 
-        [HttpPost("Create")]
-        public IActionResult Create(string seatNumber)
+        [HttpPost("CreateReservation")]
+        public IActionResult CreateReservation(Reservation reservationData)
         {
-            var paymentIntents = new PaymentIntentService();
-            var paymentIntent = paymentIntents.Create(new PaymentIntentCreateOptions
+            var result = _reservationService.CreateReservation(reservationData);
+            if (!result)
             {
-                Amount = CalculateOrderAmount(seatNumber),
-                Currency = "pln",
-            });
-            return Json(new { clientSecret = paymentIntent.ClientSecret });
+                return BadRequest(new { message = "Transaction was not created." });
+            }
+
+            return Ok(result);
         }
 
-        private long? CalculateOrderAmount(string seatNumber)
+        [HttpGet("GetUserReservations/{id}")]
+        public IActionResult GetUserReservations(int id)
         {
-            return 100;
+            var reservations = _reservationService.GetUserReservations(id);
+            if (reservations == null) return NotFound();
+            return Ok(reservations);
+        }
+
+        [HttpGet("GetFlightReservations/{id}")]
+        public IActionResult GetFlightReservations(int id)
+        {
+            var reservations = _reservationService.GetFlightReservations(id);
+            if (reservations == null) return NotFound();
+            return Ok(reservations);
+        }
+
+        [HttpGet("GetTakenSeats/{id}")]
+        public IActionResult GetTakenSeats(int id)
+        {
+            var seats = _reservationService.GetTakenSeats(id);
+            return Ok(seats);
         }
     }
 }

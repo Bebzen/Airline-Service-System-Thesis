@@ -20,34 +20,70 @@
         </mat-form-field>
 
         <button mat-raised-button color="primary" (click)="onClickFindFlights()">Search</button>
+
+        <div class="table-responsive col-md-12 mb-4" *ngIf="!isLoading">
+            <table class="table table-bordered" id="dataTable">
+                <thead>
+                    <tr>
+                        <th>Flight Number</th>
+                        <th>Starting Airport Name</th>
+                        <th>Destination Airport Name</th>
+                        <th>Flight Date</th>
+                        <th>Takeoff Hour</th>
+                        <th>Landing Hour</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr id="CrewsRow_{{flight.id}}" *ngFor="let flight of foundFlights">
+                        <td>{{flight.flightNumber}}</td>
+                        <td>{{flight.startingAirportName}}</td>
+                        <td>{{flight.destinationAirportName}}</td>
+                        <td>{{flight.flightDate | date}}</td>
+                        <td>{{flight.takeoffHour}}</td>
+                        <td>{{flight.landingHour}}</td>
+                        <td>
+                            <a class="btn btn-success btn-circle btn-sm" (click)="onClickCheckout(flight.id)">Buy</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
-    <div class="table-responsive col-md-12 mb-4" *ngIf="foundFlights">
-        <table class="table table-bordered" id="dataTable">
-            <thead>
-                <tr>
-                    <th>Flight Number</th>
-                    <th>Starting Airport Name</th>
-                    <th>Destination Airport Name</th>
-                    <th>Flight Date</th>
-                    <th>Takeoff Hour</th>
-                    <th>Landing Hour</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr id="CrewsRow_{{flight.id}}" *ngFor="let flight of foundFlights">
-                    <td>{{flight.flightNumber}}</td>
-                    <td>{{flight.startingAirportName}}</td>
-                    <td>{{flight.destinationAirportName}}</td>
-                    <td>{{flight.flightDate | date}}</td>
-                    <td>{{flight.takeoffHour}}</td>
-                    <td>{{flight.landingHour}}</td>
-                    <td>
-                        <a class="btn btn-success btn-circle btn-sm" (click)="onClickCheckUserInfo()">Buy</a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <mat-accordion>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                View your reservations
+            </mat-expansion-panel-header>
+            <div class="table-responsive col-md-12 mb-4">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Reservation Id</th>
+                            <th>Flight Origin</th>
+                            <th>Flight Destination</th>
+                            <th>Takeoff Date</th>
+                            <th>Arrival Date</th>
+                            <th>Seat Number</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr id="ReservationsRow_{{reservation.id}}" *ngFor="let reservation of reservations">
+                            <td>{{reservation.id}}</td>
+                            <td>{{reservation.flight.startingAirportName}}</td>
+                            <td>{{reservation.flight.destinationAirportName}}</td>
+                            <td>{{reservation.flight.flightDate | date}} {{reservation.flight.takeoffHour}}</td>
+                            <td>{{reservation.flight.flightDate | date}} {{reservation.flight.landingHour}}</td>
+                            <td>{{reservation.seatNumber}}</td>
+                            <td>not completed</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+    
+
 </div>

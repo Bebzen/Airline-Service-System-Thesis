@@ -107,5 +107,15 @@ namespace AirlineServiceSoftware.Services.Flights
 
             return flights;
         }
+
+        public Flight GetFlight(int Id)
+        {
+            var flight = _mediator.Send(new GetFlightRequest()
+            {
+                Id = Id
+            }).Result;
+
+            return flight;
+        }
     }
 }

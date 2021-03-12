@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './admin/admin.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 import { CustomerComponent } from './customer/customer.component';
 import { DispatcherComponent } from './dispatcher/dispatcher.component';
 import { AuthGuard } from './guards/auth-guard.service';
@@ -36,6 +37,11 @@ const routes: Routes = [
     {
         path: 'customer',
         component: CustomerComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'checkout',
+        component: CheckoutComponent,
         canActivate: [AuthGuard]
     },
     {
