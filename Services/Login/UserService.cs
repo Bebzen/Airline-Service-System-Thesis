@@ -22,12 +22,10 @@ namespace AirlineServiceSoftware.Services.Login
     {
         private readonly IMediator _mediator;
         private readonly AppSettings _appSettings;
-        private readonly IUserDataService _userDataService;
-        public UserService(IOptions<AppSettings> appSettings, IMediator mediator, IUserDataService userDataService)
+        public UserService(IOptions<AppSettings> appSettings, IMediator mediator)
         {
             _mediator = mediator;
             _appSettings = appSettings.Value;
-            _userDataService = userDataService;
         }
         public User Authenticate(string username, string password)
         {
@@ -66,7 +64,7 @@ namespace AirlineServiceSoftware.Services.Login
 
         public IEnumerable<User> GetUsers()
         {
-            var users = _mediator.Send(new GetUsersRequest()).Result;
+            var users = _mediator.Send(new GetAllUsersRequest()).Result;
             users = users.WithoutPasswords();
             return users;
         }

@@ -81,22 +81,6 @@ namespace AirlineServiceSoftware.DataAccess
                         User = newUser.WithoutPassword()
                     };
                     list.Add(newReservation);
-                    //Flight newFlight = new Flight();
-                    //var newParameters = new DynamicParameters();
-                    //newParameters.Add("@Id", result.FlightId);
-                    //newFlight = conn.Query<Flight>("GetFlight", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
-                    //var newReservation = new Reservation
-                    //{
-                    //    Id = result.Id,
-                    //    Flight = newFlight,
-                    //    IsValid = result.IsValid,
-                    //    Price = result.Price,
-                    //    SeatNumber = result.SeatNumber,
-                    //    TransactionId = result.TransactionId,
-                    //    UserId = result.UserId
-                    //};
-
-                    //list.Add(newReservation);
                 }
 
                 IEnumerable<ReservationUserResponse> reservations = list;
@@ -155,7 +139,7 @@ namespace AirlineServiceSoftware.DataAccess
             }
         }
 
-        public async Task<bool> EditReservation()
+        public async Task<bool> EditReservation(EditReservationRequest request)
         {
             try
             {
@@ -164,8 +148,8 @@ namespace AirlineServiceSoftware.DataAccess
                     conn.Open();
 
                     var parameters = new DynamicParameters();
-                    //dodaj ID i isValid
-
+                    parameters.Add("@Id", request.Id);
+                    parameters.Add("@IsValid", request.IsValid);
                     var result = conn.Query<bool>("EditReservation", parameters, commandType: CommandType.StoredProcedure);
                     return true;
                 }

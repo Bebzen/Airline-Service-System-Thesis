@@ -31,7 +31,10 @@ export class EditReservationsDialogComponent implements OnInit {
     }
 
     onClickEditReservation(reservation: IReservation) {
-        console.log(reservation);
+        this.checkoutService.editReservation(reservation).subscribe(result => {
+            console.log(result);
+        }, error => {
+            console.log(error);
+        });
     }
-    
 }

@@ -10,7 +10,6 @@
     [LandingHour] VARCHAR(8) NOT NULL, 
     [PlaneType] NVARCHAR(25) NOT NULL, 
     [TotalSeats] INT NOT NULL, 
-    [RemainingSeats] INT NOT NULL, 
     [IsApproved] BIT NOT NULL, 
     [IsCompleted] BIT NOT NULL, 
     CONSTRAINT [FK_CrewID_CrewID] FOREIGN KEY ([CrewID]) REFERENCES [Crews]([Id])

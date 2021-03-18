@@ -231,7 +231,7 @@ namespace AirlineServiceSoftware.DataAccess
             }
         }
 
-        public async Task<Flight> GetFlight(GetFlightRequest request)
+        public async Task<Flight> GetFlight(GetFlightByIdRequest request)
         {
             await using (var conn = new SqlConnection(_connectionString))
             {

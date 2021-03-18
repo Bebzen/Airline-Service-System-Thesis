@@ -6,7 +6,7 @@ import { IUser } from '../login/interfaces/iUser';
 import { AuthenticationService } from '../services/authentication.service';
 import { PaymentDialogComponent } from './payment-dialog/payment-dialog.component';
 import { CheckoutService } from './services/checkout.service';
-
+// tslint:disable: deprecation
 @Component({
     templateUrl: 'checkout.component.html',
     styleUrls: ['./checkout.component.scss']
