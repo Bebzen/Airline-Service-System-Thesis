@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using AirlineServiceSoftware.Entities;
 using AirlineServiceSoftware.Mediators.MediatorsRequests.Reservations;
 
@@ -57,6 +58,17 @@ namespace AirlineServiceSoftware.Services.Reservations
             }).Result;
 
             return seats;
+        }
+
+        public bool EditReservation(int id, bool isValid)
+        {
+            var result = _mediator.Send(new EditReservationRequest()
+            {
+                Id = id,
+                IsValid = isValid
+            }).Result;
+
+            return result;
         }
     }
 }

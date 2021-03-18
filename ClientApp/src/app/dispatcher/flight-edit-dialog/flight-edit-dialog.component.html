@@ -65,7 +65,7 @@
     <input [disabled]="data.isPilot" type="number" matInput [(ngModel)]="data.flight.totalSeats" required #totalSeats="ngModel">
 </mat-form-field>
 
-<mat-checkbox [disabled]="data.isPilot" [(ngModel)]="data.flight.isApproved">Approve flight</mat-checkbox>
+<mat-checkbox style="margin-right:10px" [disabled]="data.isPilot" [(ngModel)]="data.flight.isApproved">Approve flight</mat-checkbox><span></span>
 <mat-checkbox [(ngModel)]="data.flight.isCompleted">Complete flight</mat-checkbox>
-
+<br>
 <button mat-raised-button color="primary" (click)="onClickEditFlight(data.flight)">Edit</button>

@@ -91,6 +91,7 @@
     <Build Include="dbo\Programmability\Stored Procedures\GetFlightReservations.sql" />
     <Build Include="dbo\Programmability\Stored Procedures\GetUserReservations.sql" />
     <Build Include="dbo\Programmability\Stored Procedures\GetTakenSeats.sql" />
+    <Build Include="dbo\Programmability\Stored Procedures\EditReservation.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="AirlineServiceSoftware.Database.refactorlog" />

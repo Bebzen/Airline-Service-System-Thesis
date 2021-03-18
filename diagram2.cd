@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="E_Commerce.Shared.Data.DataContext">
+    <Position X="27" Y="8.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAEAQAABIAIAAAAAAAAAAAAA0AAAEAAAAEAAAAAQAAQ=</HashCode>
+      <FileName>Shared\Data\DataContext.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="ShippingCompanies" />
+      <Property Name="Categories" />
+      <Property Name="MainPageItems" />
+      <Property Name="Orders" />
+      <Property Name="Products" />
+      <Property Name="RefreshTokens" />
+      <Property Name="Sections" />
+      <Property Name="ShoppingCartItems" />
+      <Property Name="ShoppingCarts" />
+      <Property Name="SubCategories" />
+      <Property Name="UserInformations" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="E_Commerce.Shared.Entities.ShippingCompany">
+    <Position X="23.75" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Shared\Entities\ShippingCompany.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Commerce.Shared.Entities.Category">
+    <Position X="32" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAIAQAAA=</HashCode>
+      <FileName>Shared\Entities\Category.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Commerce.Shared.Entities.MainPageItem">
+    <Position X="26.75" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAECAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Shared\Entities\MainPageItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Commerce.Shared.Entities.Order">
+    <Position X="22.75" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAQAAAAAAAAAAQAEAAAAAAAgggARAAIAAAABARIAAA=</HashCode>
+      <FileName>Shared\Entities\Order.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Commerce.Shared.Entities.Product">
+    <Position X="30" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAQAgABAAAAAAAAQACgAAAAAAAAAAgQAAAAA=</HashCode>
+      <FileName>Shared\Entities\Product.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Commerce.Shared.Entities.RefreshToken">
+    <Position X="29.75" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAVAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAQAAAABAEA=</HashCode>
+      <FileName>Shared\Entities\RefreshToken.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Commerce.Shared.Entities.Section">
+    <Position X="24.75" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAEAAAAAAAAAEAAAA=</HashCode>
+      <FileName>Shared\Entities\Section.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Commerce.Shared.Entities.ShoppingCartItem" Collapsed="true">
+    <Position X="26.75" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAACAAAAAAAAAAAAEAAAAAgAAgAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>Shared\Entities\ShoppingCartItem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Commerce.Shared.Entities.ShoppingCart">
+    <Position X="27.75" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAAAiAAAAAAAAAIgAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>Shared\Entities\ShoppingCart.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Commerce.Shared.Entities.SubCategory">
+    <Position X="29.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAgAAAAAAAAQAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>Shared\Entities\SubCategory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="E_Commerce.Shared.Entities.UserInformations">
+    <Position X="24.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAgAAAAAIgAAEQAQAAAAAAAAAAAIAgAAAAAA=</HashCode>
+      <FileName>Shared\Entities\UserInformations.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

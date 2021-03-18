@@ -1,4 +1,5 @@
-﻿using AirlineServiceSoftware.Entities;
+﻿using System.Reflection.Metadata.Ecma335;
+using AirlineServiceSoftware.Entities;
 using AirlineServiceSoftware.Services.Reservations;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -49,6 +50,13 @@ namespace AirlineServiceSoftware.Controllers
         {
             var seats = _reservationService.GetTakenSeats(id);
             return Ok(seats);
+        }
+
+        [HttpPost("EditReservation")]
+        public IActionResult EditReservation([FromBody] Reservation editReservation)
+        {
+            var result = _reservationService.EditReservation(editReservation.Id, editReservation.IsValid);
+            return Ok(result);
         }
     }
 }

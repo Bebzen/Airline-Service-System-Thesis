@@ -13,7 +13,6 @@ BEGIN
 	[LandingHour],
 	[PlaneType],
 	[TotalSeats],
-	[RemainingSeats],
 	[IsApproved],
 	[IsCompleted]
 	FROM Flights

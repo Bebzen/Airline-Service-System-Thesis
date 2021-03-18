@@ -48,7 +48,7 @@ namespace AirlineServiceSoftware.DataAccess
             }
         }
 
-        public async Task<IEnumerable<User>> GetAllUsers(GetUsersRequest request)
+        public async Task<IEnumerable<User>> GetAllUsers(GetAllUsersRequest request)
         {
             await using (var conn = new SqlConnection(_connectionString))
             {

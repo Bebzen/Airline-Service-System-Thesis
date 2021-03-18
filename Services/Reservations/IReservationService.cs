@@ -10,5 +10,6 @@ namespace AirlineServiceSoftware.Services.Reservations
         IEnumerable<Reservation> GetUserReservations(int id);
         IEnumerable<ReservationUserResponse> GetFlightReservations(int id);
         IEnumerable<string> GetTakenSeats(int id);
+        bool EditReservation(int id, bool isValid);
     }
 }

@@ -192,7 +192,7 @@ Załoga to grup
                     <mat-label>Total Seats</mat-label>
                     <input type="number" matInput [(ngModel)]="newFlight.totalSeats" required #totalSeats="ngModel">
                 </mat-form-field>
-
+                <br>
                 <button mat-raised-button color="primary" (click)="onClickCreateFlight()">Create</button>
             </mat-expansion-panel>
             <mat-expansion-panel>
@@ -236,13 +236,13 @@ Załoga to grup
                                     <mat-icon *ngIf="flight.isApproved && flight.isCompleted">done</mat-icon>
                                 </td>
                                 <td>
-                                    <a class="btn btn-success btn-circle btn-sm" (click)="onClickEditFlight(flight)">Edit</a>
+                                    <a mat-raised-button color="primary" (click)="onClickEditFlight(flight)">Edit</a>
                                 </td>
                                 <td>
-                                    <a class="btn btn-success btn-circle btn-sm" (click)="onClickDeleteFlight(flight)">Delete</a>
+                                    <a mat-raised-button color="primary" (click)="onClickDeleteFlight(flight)">Delete</a>
                                 </td>
                                 <td>
-                                    <a class="btn btn-success btn-circle btn-sm" (click)="onClickViewReservations(flight)">Reservations</a>
+                                    <a mat-raised-button color="primary" (click)="onClickViewReservations(flight)">Reservations</a>
                                 </td>
                             </tr>
                         </tbody>

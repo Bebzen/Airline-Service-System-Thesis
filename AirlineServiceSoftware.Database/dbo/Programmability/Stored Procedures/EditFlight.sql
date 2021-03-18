@@ -9,7 +9,6 @@
 	@LandingHour time(7),
 	@PlaneType nvarchar(25),
 	@TotalSeats int,
-	@RemainingSeats int,
 	@IsApproved bit,
 	@IsCompleted bit
 AS
@@ -25,7 +24,6 @@ BEGIN
 	[LandingHour] = @LandingHour,
 	[PlaneType] = @PlaneType,
 	[TotalSeats] = @TotalSeats,
-	[RemainingSeats] = @RemainingSeats,
 	[IsApproved] = @IsApproved,
 	[IsCompleted] = @IsCompleted
 	WHERE [Id] = @Id

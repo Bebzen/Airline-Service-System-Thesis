@@ -9,7 +9,7 @@ using MediatR;
 
 namespace AirlineServiceSoftware.Mediators.MediatorsRequestsHandler.Users
 {
-    public class GetUsersRequestHandler : IRequestHandler<GetUsersRequest, IEnumerable<User>>
+    public class GetUsersRequestHandler : IRequestHandler<GetAllUsersRequest, IEnumerable<User>>
     {
         private readonly IUserDataService _userDataService;
 
@@ -19,7 +19,7 @@ namespace AirlineServiceSoftware.Mediators.MediatorsRequestsHandler.Users
             _userDataService = dataAccessService;
         }
 
-        public Task<IEnumerable<User>> Handle(GetUsersRequest request, CancellationToken cancellationToken)
+        public Task<IEnumerable<User>> Handle(GetAllUsersRequest request, CancellationToken cancellationToken)
         {
             return _userDataService.GetAllUsers(request);
         }

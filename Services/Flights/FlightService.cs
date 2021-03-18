@@ -110,7 +110,7 @@ namespace AirlineServiceSoftware.Services.Flights
 
         public Flight GetFlight(int Id)
         {
-            var flight = _mediator.Send(new GetFlightRequest()
+            var flight = _mediator.Send(new GetFlightByIdRequest()
             {
                 Id = Id
             }).Result;

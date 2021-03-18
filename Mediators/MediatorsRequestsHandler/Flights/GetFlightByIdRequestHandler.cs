@@ -8,15 +8,15 @@ using MediatR;
 
 namespace AirlineServiceSoftware.Mediators.MediatorsRequestsHandler.Flights
 {
-    public class GetFlightRequestHandler : IRequestHandler<GetFlightRequest, Flight>
+    public class GetFlightByIdRequestHandler : IRequestHandler<GetFlightByIdRequest, Flight>
     {
         private readonly IFlightDataService _flightDataService;
-        public GetFlightRequestHandler(IFlightDataService dataAccessService)
+        public GetFlightByIdRequestHandler(IFlightDataService dataAccessService)
         {
             _flightDataService = dataAccessService ?? throw new ArgumentNullException(nameof(dataAccessService));
             _flightDataService = dataAccessService;
         }
-        public async Task<Flight> Handle(GetFlightRequest request, CancellationToken cancellationToken)
+        public async Task<Flight> Handle(GetFlightByIdRequest request, CancellationToken cancellationToken)
         {
             return await _flightDataService.GetFlight(request);
         }
