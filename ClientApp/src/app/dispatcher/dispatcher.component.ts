@@ -20,13 +20,11 @@ import { DispatcherService } from './services/dispatcher.service';
 export class DispatcherComponent implements OnInit {
 
     crewname = '';
-    _selectionError = '';
-    errors = '';
     selectedCaptainId = -1;
     selectedFirstOfficerId = -2;
     selectedSecondOfficerId = -3;
-    addError = '';
-    addResultValid = '';
+    error = '';
+    resultValid = '';
     newCrew: ICrew;
     crewFilter: string;
     newFlight: IFlight;
@@ -34,8 +32,6 @@ export class DispatcherComponent implements OnInit {
     planeTypes;
 
     newFlightDate: Moment;
-
-    deleteResultValid = '';
 
     crews: ICrew[] = [];
     filteredCrews: ICrew[] = [];
@@ -59,9 +55,6 @@ export class DispatcherComponent implements OnInit {
 
         this.dispatcherService.getAllPilots().subscribe(users => {
             this.pilots = users;
-        },
-        error => {
-            console.log(error);
         });
         this.dispatcherService.getAllCrews().subscribe(crews => {
             this.crews = crews;
@@ -132,7 +125,7 @@ export class DispatcherComponent implements OnInit {
             (this.newCrew.captain.id === this.newCrew.secondOfficer.id) ||
             (this.newCrew.firstOfficer.id === this.newCrew.secondOfficer.id)
         ) {
-            this._selectionError = 'You cannot assign one pilot to two different spots!';
+            this.error = 'You cannot assign one pilot to two different spots!';
             return false;
         }
         return true;
@@ -156,34 +149,49 @@ export class DispatcherComponent implements OnInit {
     onClickDeleteCrew(crew: ICrew) {
         this.dispatcherService.deleteCrew(crew.id).subscribe(
             result => {
-                this.deleteResultValid = 'User Deleted.';
-                this.ngOnInit();
-            }
-        );
-    }
-
-    onClickCreateCrew(): void {
-        if (this.selectPilotCheck()) {
-            this.dispatcherService.createCrew(this.newCrew).subscribe(result => {
-                this.addResultValid = 'Crew Created';
+                this.resultValid = 'Crew Deleted.';
                 this.ngOnInit();
             },
             error => {
-                this.addError = error;
+                this.error = `Couldn't delete the Crew.`
             });
+    }
+
+    onClickCreateCrew(): void {
+        this.error = '';
+        this.resultValid = '';
+        if (!this.newCrew.captain || !this.newCrew.firstOfficer || !this.newCrew.secondOfficer || !this.newCrew.crewName) {
+            this.error = `Some fields are empty.`
+        } else {
+            if (this.selectPilotCheck()) {
+                this.dispatcherService.createCrew(this.newCrew).subscribe(result => {
+                    this.resultValid = 'Crew Created.';
+                    this.ngOnInit();
+                },
+                error => {
+                    this.error = `Couldn't create the Crew.`
+                });
+            }
         }
     }
 
     onClickCreateFlight(): void {
+        this.error = '';
+        this.resultValid = '';
         this.newFlight.isApproved = false;
         this.newFlight.isCompleted = false;
-        this.newFlight.remainingSeats = this.newFlight.totalSeats;
-        this.dispatcherService.createFlight(this.newFlight).subscribe(result => {
-            this.ngOnInit();
-        },
-        error => {
-
-        });
+        if (!this.newFlight.flightNumber || !this.newFlight.crew || !this.newFlight.startingAirportName || !this.newFlight.destinationAirportName ||
+            !this.newFlight.flightDate || !this.newFlight.takeoffHour || !this.newFlight.landingHour || !this.newFlight.planeType || !this.newFlight.totalSeats) {
+            this.error = `Some fields are empty.`
+        } else {
+            this.dispatcherService.createFlight(this.newFlight).subscribe(result => {
+                this.ngOnInit();
+                this.resultValid = `Flight Created.`;
+            },
+            error => {
+                this.error = `Couldn't create the Flight.`
+            });
+        }
     }
 
     onClickEditFlight(flight: IFlight) {
@@ -197,9 +205,10 @@ export class DispatcherComponent implements OnInit {
     onClickDeleteFlight(flight: IFlight) {
         this.dispatcherService.deleteFlight(flight.id).subscribe(result => {
             this.ngOnInit();
+            this.resultValid = `Flight deleted.`
         },
         error => {
-
+            this.error = `Couldn't delete the flight.`
         });
     }
 

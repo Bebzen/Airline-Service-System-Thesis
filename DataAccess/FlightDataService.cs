@@ -40,7 +40,6 @@ namespace AirlineServiceSoftware.DataAccess
                     parameters.Add("@LandingHour", request.LandingHour);
                     parameters.Add("@PlaneType", request.PlaneType);
                     parameters.Add("@TotalSeats", request.TotalSeats);
-                    parameters.Add("@RemainingSeats", request.TotalSeats);
                     parameters.Add("@IsApproved", request.IsApproved);
                     parameters.Add("@IsCompleted", request.IsCompleted);
 
@@ -94,7 +93,6 @@ namespace AirlineServiceSoftware.DataAccess
                     parameters.Add("@LandingHour", request.LandingHour);
                     parameters.Add("@PlaneType", request.PlaneType);
                     parameters.Add("@TotalSeats", request.TotalSeats);
-                    parameters.Add("@RemainingSeats", request.TotalSeats);
                     parameters.Add("@IsApproved", request.IsApproved);
                     parameters.Add("@IsCompleted", request.IsCompleted);
 
@@ -156,7 +154,6 @@ namespace AirlineServiceSoftware.DataAccess
                         LandingHour = flight.LandingHour,
                         PlaneType = flight.PlaneType,
                         TotalSeats = flight.TotalSeats,
-                        RemainingSeats = flight.RemainingSeats,
                         IsApproved = flight.IsApproved,
                         IsCompleted = flight.IsCompleted
                     };
@@ -231,7 +228,7 @@ namespace AirlineServiceSoftware.DataAccess
             }
         }
 
-        public async Task<Flight> GetFlight(GetFlightByIdRequest request)
+        public async Task<Flight> GetFlightById(GetFlightByIdRequest request)
         {
             await using (var conn = new SqlConnection(_connectionString))
             {
@@ -240,7 +237,7 @@ namespace AirlineServiceSoftware.DataAccess
                 var parameters = new DynamicParameters();
                 parameters.Add("@Id", request.Id);
 
-                var result = conn.Query<Flight>("GetFlight", parameters, commandType: CommandType.StoredProcedure);
+                var result = conn.Query<Flight>("GetFlightById", parameters, commandType: CommandType.StoredProcedure);
                 return result.SingleOrDefault();
             }
         }

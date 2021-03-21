@@ -15,4 +15,8 @@ export class UserService {
     getById(id: number) {
         return this.http.get<IUser>(`${environment.apiUrl}Users/GetUsers/${id}`);
     }
+
+    editUser(user: IUser) {
+        return this.http.post<IUser>(`${environment.apiUrl}Users/EditUser`, user);
+    }
 }

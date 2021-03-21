@@ -4,15 +4,11 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
-using AirlineServiceSoftware.DataAccess;
 using AirlineServiceSoftware.Entities;
 using AirlineServiceSoftware.Helpers;
 using AirlineServiceSoftware.Mediators.MediatorsRequests;
 using AirlineServiceSoftware.Mediators.MediatorsRequests.Users;
-using BCrypt.Net;
 using MediatR;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
@@ -62,7 +58,7 @@ namespace AirlineServiceSoftware.Services.Login
             return user.WithoutPassword();
         }
 
-        public IEnumerable<User> GetUsers()
+        public IEnumerable<User> GetAllUsers()
         {
             var users = _mediator.Send(new GetAllUsersRequest()).Result;
             users = users.WithoutPasswords();

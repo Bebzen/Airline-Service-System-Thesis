@@ -16,10 +16,11 @@ namespace AirlineServiceSoftware.Controllers
             _flightService = flightService;
         }
 
-        [Authorize(Roles = "Admin, Dispatcher")]
+        [Authorize(Roles = Role.Dispatcher)]
         [HttpPost("CreateFlight")]
         public IActionResult CreateFlight([FromBody] Flight flightData)
         {
+            flightData.FlightDate = flightData.FlightDate.AddDays(1);
             var result = _flightService.CreateFlight(flightData);
             if (!result)
             {
@@ -29,7 +30,7 @@ namespace AirlineServiceSoftware.Controllers
 
         }
 
-        [Authorize(Roles = "Admin, Dispatcher")]
+        [Authorize(Roles = Role.Dispatcher)]
         [HttpGet("GetAllFlights")]
         public IActionResult GetAllFlights()
         {
@@ -38,10 +39,11 @@ namespace AirlineServiceSoftware.Controllers
             return Ok(flights);
         }
 
-        [Authorize(Roles = "Admin, Dispatcher")]
+        [Authorize(Roles = Role.Dispatcher)]
         [HttpPost("EditFlight")]
         public IActionResult EditFlight([FromBody] Flight flightData)
         {
+            flightData.FlightDate = flightData.FlightDate.AddDays(1);
             var result = _flightService.EditFlight(flightData);
             if (!result)
             {
@@ -50,7 +52,7 @@ namespace AirlineServiceSoftware.Controllers
             return Ok(result);
         }
 
-        [Authorize(Roles = "Admin, Dispatcher")]
+        [Authorize(Roles = Role.Dispatcher)]
         [HttpDelete("DeleteFlight/{Id}")]
         public IActionResult DeleteFlight(int Id)
         {
@@ -63,7 +65,7 @@ namespace AirlineServiceSoftware.Controllers
 
         }
 
-        [Authorize(Roles = "Admin, Pilot")]
+        [Authorize(Roles = Role.Pilot)]
         [HttpGet("GetPilotFlights/{id}")]
         public IActionResult GetPilotFlights(int id)
         {
@@ -72,7 +74,7 @@ namespace AirlineServiceSoftware.Controllers
             return Ok(flights);
         }
 
-        [Authorize(Roles = "Admin, Pilot")]
+        [Authorize(Roles = Role.Pilot)]
         [HttpPost("EditFlightStatus")]
         public IActionResult EditFlightStatus([FromBody] Flight flightData)
         {

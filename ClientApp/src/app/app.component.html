@@ -3,8 +3,8 @@
     <span><mat-icon>airplanemode_active</mat-icon> Linia Lotnicza</span>
     <button mat-icon-button class="home-icon" routerLink="/" *ngIf="user"><mat-icon>home</mat-icon></button>
     <button mat-icon-button class="admin-icon" routerLink="/admin" *ngIf="isAdmin"><mat-icon>admin_panel_settings</mat-icon></button>
-    <button mat-icon-button class="dispatcher-icon" routerLink="/dispatcher" *ngIf="isAdmin || isDispatcher"><mat-icon>receipt</mat-icon></button>
-    <button mat-icon-button class="pilot-icon" routerLink="/pilot" *ngIf="isAdmin || isPilot"><mat-icon>flight_takeoff</mat-icon></button>
+    <button mat-icon-button class="dispatcher-icon" routerLink="/dispatcher" *ngIf="isDispatcher"><mat-icon>receipt</mat-icon></button>
+    <button mat-icon-button class="pilot-icon" routerLink="/pilot" *ngIf="isPilot"><mat-icon>flight_takeoff</mat-icon></button>
     <button mat-icon-button class="customer-icon" routerLink="/customer" *ngIf="user"><mat-icon>credit_card</mat-icon></button>
     <span class="example-spacer"></span>
     <button mat-icon-button class="logout-icon" (click)="logout()"><mat-icon>login</mat-icon></button>
@@ -13,3 +13,25 @@
   <router-outlet></router-outlet>
 </div>
 </body>
+<footer class="text-center " style="background-color: #673ab7">
+  <!-- Grid container -->
+  <div class="container p-4">
+    <!--Grid row-->
+      <!--Grid column-->
+      <div class="" style="text-align:center">
+        <h5 class="text-uppercase" style="color: white">For any questions that you might have, contact us at:</h5>
+          <h6 style="color: white">Phone: +48 123 456 789</h6>
+          <h6 style="color: white">Email address: Company@gmail.com</h6>
+      </div>
+    <!--Grid row-->
+  </div>
+  <!-- Grid container -->
+
+  <!-- Copyright -->
+  <div class="text-center p-3 text-light" style="background-color: rgba(0, 0, 0, 0.2);">
+    © 2021 Copyright:
+    <a class="text-light">Katarzyna Goźlińska</a>
+  </div>
+  <!-- Copyright -->
+</footer>
+<!-- Footer -->

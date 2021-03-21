@@ -105,7 +105,7 @@ namespace AirlineServiceSoftware.DataAccess
                     Flight newFlight = new Flight();
                     var newParameters = new DynamicParameters();
                     newParameters.Add("@Id", result.FlightId);
-                    newFlight = conn.Query<Flight>("GetFlight", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                    newFlight = conn.Query<Flight>("GetFlightById", parameters, commandType: CommandType.StoredProcedure).FirstOrDefault();
                     var newReservation = new Reservation
                     {
                         Id = result.Id,

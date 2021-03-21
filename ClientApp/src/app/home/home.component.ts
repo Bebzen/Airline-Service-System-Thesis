@@ -15,16 +15,30 @@ export class HomeComponent implements OnInit {
   loading = false;
   user: IUser;
   userFromApi: IUser;
+  userChanges: IUser;
+  error = '';
+  resultValid = '';
 
   constructor(private userService: UserService, private authenticationService: AuthenticationService) {
     this.user = this.authenticationService.userValue;
+    this.userChanges = {} as IUser;
     }
   ngOnInit() {
     this.loading = true;
     this.userService.getById(this.user.id).pipe(first()).subscribe(user => {
       this.loading = false;
       this.userFromApi = user;
+      this.userChanges = user;
     });
+  }
+  
+  onClickEditUser() {
+    this.userService.editUser(this.userChanges).subscribe(user => {
+      this.resultValid = 'Data edited successfuly.'
+    },
+    error => {
+      this.error = `Data could not be edited.`
+    })
   }
 
 }

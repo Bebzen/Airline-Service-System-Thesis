@@ -1,9 +1,9 @@
 <div class="card mt-4">
     <h4 class="card-header">Admin</h4>
     <div class="card-body">
-        <div *ngIf="addResultValid" class="alert alert-success">{{addResultValid}}</div>
+        <div *ngIf="resultValid" class="alert alert-success">{{resultValid}}</div>
 
-        <div *ngIf="addError" class="alert alert-danger">{{addError}}</div>
+        <div *ngIf="error" class="alert alert-danger">{{error}}</div>
         <mat-accordion>
             <mat-expansion-panel>
                 <mat-expansion-panel-header>
@@ -98,8 +98,6 @@
                 <mat-expansion-panel-header>
                     View All Users
                 </mat-expansion-panel-header>
-                <div *ngIf="deleteResultValid" class="alert alert-success">{{deleteResultValid}}</div>
-                <div *ngIf="deleteError" class="alert alert-danger">{{deleteError}}</div>
                 <div class="col-md-4">
                     <mat-form-field>
                         <input matInput [(ngModel)]="usernameFilter" placeholder="Filter by username">

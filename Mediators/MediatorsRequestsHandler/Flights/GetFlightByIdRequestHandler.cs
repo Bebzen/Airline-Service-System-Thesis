@@ -18,7 +18,7 @@ namespace AirlineServiceSoftware.Mediators.MediatorsRequestsHandler.Flights
         }
         public async Task<Flight> Handle(GetFlightByIdRequest request, CancellationToken cancellationToken)
         {
-            return await _flightDataService.GetFlight(request);
+            return await _flightDataService.GetFlightById(request);
         }
     }
 }

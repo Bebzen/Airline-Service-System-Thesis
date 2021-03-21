@@ -5,6 +5,6 @@ AS
 BEGIN
 	UPDATE Reservations
 	SET
-	[isValid] = @IsValid
+	[IsValid] = @IsValid
 	WHERE [Id] = @Id
 END

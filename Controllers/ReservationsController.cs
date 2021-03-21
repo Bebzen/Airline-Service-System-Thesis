@@ -37,6 +37,7 @@ namespace AirlineServiceSoftware.Controllers
             return Ok(reservations);
         }
 
+        [Authorize(Roles = Role.Dispatcher)]
         [HttpGet("GetFlightReservations/{id}")]
         public IActionResult GetFlightReservations(int id)
         {
@@ -52,6 +53,7 @@ namespace AirlineServiceSoftware.Controllers
             return Ok(seats);
         }
 
+        [Authorize(Roles = Role.Dispatcher)]
         [HttpPost("EditReservation")]
         public IActionResult EditReservation([FromBody] Reservation editReservation)
         {

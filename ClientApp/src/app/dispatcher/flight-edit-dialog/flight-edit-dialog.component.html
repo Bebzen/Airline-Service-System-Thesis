@@ -28,7 +28,7 @@
 
 <mat-form-field>
     <mat-label>Flight Date</mat-label>
-    <input [disabled]="data.isPilot" matInput [matDatepicker]="picker" required [value]="data.flight.flightDate">
+    <input [disabled]="data.isPilot" matInput [matDatepicker]="picker" required [(ngModel)]="data.flight.flightDate">
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
 </mat-form-field>

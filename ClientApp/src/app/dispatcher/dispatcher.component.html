@@ -1,20 +1,10 @@
-<!--TODO: 
-1.Po pierwsze obsługa załóg a co za tym idzie utworzenie roli pilota.
- - Tworzenie, Wyświetlanie, Edytowanie i Usuwanie załóg. + zrobione
-2.Obsługa lotów. Tu trochę bardziej skomplikowane to będzie...
- - Tworzenie, Wyświetlanie, Edytowanie i Usuwanie lotów.
-3. ...Bo trzeba będzie też obsługiwać rezerwacje klientów.
-
-Załoga to grup
--->
 <div class="card mt-4">
     <h4 class="card-header">Dispatcher</h4>
     <div class="card-body">
-        <div *ngIf="addResultValid" class="alert alert-success">{{addResultValid}}</div>
+        <div *ngIf="resultValid" class="alert alert-success">{{resultValid}}</div>
 
-        <div *ngIf="addError" class="alert alert-danger">{{addError}}</div>
+        <div *ngIf="error" class="alert alert-danger">{{error}}</div>
         <mat-accordion>
-            <!-- Adding a crew-->
             <mat-expansion-panel>
                 <mat-expansion-panel-header>
                     Create Crew
@@ -23,12 +13,6 @@ Załoga to grup
                     <mat-label>Crew Name</mat-label>
                     <input matInput [(ngModel)]="newCrew.crewName" required #crewName="ngModel">
                 </mat-form-field>
-
-                <div *ngIf="crewName.invalid && (crewName.dirty || crewName.touched)" class="alert alert-danger">
-                    <div *ngIf="crewName.errors.required">
-                        Field cannot be empty.
-                    </div>
-                </div>
 
                 <mat-form-field>
                     <mat-label>Captain</mat-label>
@@ -74,8 +58,6 @@ Załoga to grup
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
-
-                <div *ngIf="_selectionError" class="alert alert-danger">{{_selectionError}}</div>
                 <br>
                 <button mat-raised-button color="primary" (click)="onClickCreateCrew()">Create</button>
             </mat-expansion-panel>
@@ -146,7 +128,7 @@ Załoga to grup
                 </mat-form-field>
 
                 <mat-form-field>
-                    <mat-label>Starting Airport Name</mat-label>
+                    <mat-label>Origin Airport Name</mat-label>
                     <input matInput [(ngModel)]="newFlight.startingAirportName" required #startingAirportName="ngModel">
                 </mat-form-field>
 
@@ -213,7 +195,7 @@ Załoga to grup
                                 <th>Id</th>
                                 <th>Crew Name</th>
                                 <th>Flight Number</th>
-                                <th>Starting Airport Name</th>
+                                <th>Origin Airport Name</th>
                                 <th>Destination Airport Name</th>
                                 <th>Flight Date</th>
                                 <th>Status</th>
