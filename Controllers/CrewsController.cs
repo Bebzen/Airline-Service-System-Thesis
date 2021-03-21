@@ -17,7 +17,7 @@ namespace AirlineServiceSoftware.Controllers
             _crewService = crewService;
         }
 
-        [Authorize(Roles = "Admin, Dispatcher")]
+        [Authorize(Roles = Role.Dispatcher)]
         [HttpGet("GetAllPilots")]
         public IActionResult GetAllPilots()
         {
@@ -26,7 +26,7 @@ namespace AirlineServiceSoftware.Controllers
             return Ok(pilots);
         }
 
-        [Authorize(Roles = "Admin, Dispatcher")]
+        [Authorize(Roles = Role.Dispatcher)]
         [HttpGet("GetAllCrews")]
         public IActionResult GetAllCrews()
         {
@@ -35,10 +35,16 @@ namespace AirlineServiceSoftware.Controllers
             return Ok(crews);
         }
 
-        [Authorize(Roles = "Admin, Dispatcher")]
+        [Authorize(Roles = Role.Dispatcher)]
         [HttpPost("CreateCrew")]
         public IActionResult CreateCrew([FromBody] Crew crewData)
         {
+            if ((crewData.Captain.Id == crewData.FirstOfficer.Id) ||
+                (crewData.Captain.Id == crewData.SecondOfficer.Id) ||
+                (crewData.FirstOfficer.Id == crewData.SecondOfficer.Id))
+            {
+                return BadRequest(new { message = "Crew was not modified." });
+            }
             var result = _crewService.CreateCrew(crewData);
             if (!result)
             {
@@ -48,7 +54,7 @@ namespace AirlineServiceSoftware.Controllers
 
         }
 
-        [Authorize(Roles = "Admin, Dispatcher")]
+        [Authorize(Roles = Role.Dispatcher)]
         [HttpPost("EditCrew")]
         public IActionResult EditCrew([FromBody] Crew crewData)
         {
@@ -60,7 +66,7 @@ namespace AirlineServiceSoftware.Controllers
             return Ok(result);
         }
 
-        [Authorize(Roles = "Admin, Dispatcher")]
+        [Authorize(Roles = Role.Dispatcher)]
         [HttpDelete("DeleteCrew/{Id}")]
         public IActionResult DeleteCrew(int Id)
         {

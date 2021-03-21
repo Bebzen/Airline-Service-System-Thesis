@@ -1,13 +1,47 @@
 <div class="card mt-4">
   <h4 class="card-header">Home</h4>
   <div class="card-body">
-      <p>You're logged in with Angular 9 & JWT!!</p>
-      <p>Your role is: <strong>{{user.role}}</strong>.</p>
-      <p>This page can be accessed by <u>all authenticated users</u>.</p>
-      <p class="mb-1">Current user from secure api end point:</p>
-      <div *ngIf="loading" class="spinner-border spinner-border-sm"></div>
-      <ul *ngIf="userFromApi">
-          <li>{{userFromApi.firstName}} {{userFromApi.lastName}}</li>
-      </ul>
+    <h5 style="text-align:center">Hello, {{userFromApi.firstName}}</h5>
+    <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+    <div *ngIf="resultValid" class="alert alert-success">{{resultValid}}</div>
+    <div style="text-align:center">
+    <mat-form-field>
+      <mat-label>Password</mat-label>
+      <input type="password" matInput [(ngModel)]="userChanges.password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%?&])[A-Za-z\d$@$!%?&]{8,}$" #password="ngModel">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Phone Number</mat-label>
+      <input type="number" matInput [(ngModel)]="userChanges.phoneNumber">
+    </mat-form-field>
+    <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger">
+      <div *ngIf="password.errors.pattern">
+          Password must be at least 8 characters long, have one uppercase letter, one lowercase, one number and one special character.
+      </div>
+    </div>
+    <br>
+    <mat-form-field>
+      <mat-label>Email</mat-label>
+      <input type="email" matInput [(ngModel)]="userChanges.email" required email #email="ngModel">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Pesel</mat-label>
+      <input matInput [(ngModel)]="userChanges.pesel">
+    </mat-form-field>
+    <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger">
+      <div *ngIf="email.errors.required">
+          Email cannot be empty.
+      </div>
+      <div *ngIf="email.errors.email">
+          Email must be an actual email.
+      </div>
+    </div>
+    <br>
+    <button mat-raised-button color="primary" style="margin-right:50px" (click)="onClickEditUser()">Submit</button>
+
+    <mat-form-field>
+      <mat-label>ID Card Number</mat-label>
+      <input matInput [(ngModel)]="userChanges.documentId">
+    </mat-form-field>
+  </div>
   </div>
 </div>

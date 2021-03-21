@@ -1,5 +1,5 @@
-﻿using System.Text.RegularExpressions;
-using AirlineServiceSoftware.Entities;
+﻿using AirlineServiceSoftware.Entities;
+using AirlineServiceSoftware.Helpers;
 using AirlineServiceSoftware.Models;
 using AirlineServiceSoftware.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -26,21 +26,21 @@ namespace AirlineServiceSoftware.Controllers
             var user = _userService.Authenticate(model.Username, model.Password);
             if (user == null)
             {
-                return BadRequest(new {message = "Username or Password is incorrect"});
+                return BadRequest(new { message = "Username or Password is incorrect" });
             }
             return Ok(user);
         }
 
         [Authorize(Roles = Role.Admin)]
         [HttpGet("GetUsers")]
-        public IActionResult GetUsers()
+        public IActionResult GetAllUsers()
         {
-            var users = _userService.GetUsers();
+            var users = _userService.GetAllUsers();
             return Ok(users);
         }
 
         [HttpGet("GetUsers/{id?}")]
-        public IActionResult GetById(int id)
+        public IActionResult GetUserById(int id)
         {
             var currentUserId = int.Parse(User.Identity.Name);
             if (id != currentUserId && !User.IsInRole(Role.Admin))
@@ -60,23 +60,26 @@ namespace AirlineServiceSoftware.Controllers
         [HttpPost("CreateUser")]
         public IActionResult CreateUser([FromBody] User UserData)
         {
-            var passwordValidation = Regex.Matches(UserData.Password, @"^(?=.*[a - z])(?=.*[A - Z])(?=.*[0 - 9])(?=.*[$@$!%? &])[A - Za - z\d$@$!%? &]{ 8,}$").Count;
-            if (passwordValidation == 0)
+            var dataValidationResult = UserData.Password.IsValidPassword(); if (dataValidationResult == false) return BadRequest(new { message = "Invalid Password." });
+            if (UserData.Pesel != null) dataValidationResult = UserData.Pesel.IsValidPESEL(); if (dataValidationResult == false) return BadRequest(new { message = "Invalid PESEL." });
+            if (UserData.DocumentId != null) dataValidationResult = UserData.DocumentId.IsValidID(); if (dataValidationResult == false) return BadRequest(new { message = "Invalid ID." });
+            var result = _userService.CreateUser(UserData);
+            if (!result)
             {
-                var result = _userService.CreateUser(UserData);
-                if (!result)
-                {
-                    return BadRequest(new { message = "User was not added." });
-                }
-                return Ok(result);
+                return BadRequest(new { message = "User was not added." });
             }
-            else return BadRequest(new { message = "Invalid password."});
+
+            return Ok(result);
         }
 
         [Authorize(Roles = Role.Admin)]
         [HttpPost("EditUser")]
         public IActionResult EditUser([FromBody] User UserData)
         {
+            var dataValidationResult = true;
+            if (UserData.Password != null) dataValidationResult = UserData.Password.IsValidPassword(); if (dataValidationResult == false) return BadRequest(new { message = "Invalid data." });
+            if (UserData.Pesel != null) dataValidationResult = UserData.Pesel.IsValidPESEL(); if (dataValidationResult == false) return BadRequest(new { message = "Invalid data." });
+            if (UserData.DocumentId != null) dataValidationResult = UserData.DocumentId.IsValidID(); if (dataValidationResult == false) return BadRequest(new { message = "Invalid data." });
             var result = _userService.EditUser(UserData);
             if (!result)
             {
@@ -92,7 +95,7 @@ namespace AirlineServiceSoftware.Controllers
             var result = _userService.DeleteUser(Id);
             if (!result)
             {
-                return BadRequest(new { message = "User was not deleted."});
+                return BadRequest(new { message = "User was not deleted." });
             }
             return Ok(result);
         }

@@ -20,10 +20,6 @@ namespace AirlineServiceSoftware.Mediators.MediatorsRequestsHandler.Users
         }
         public Task<bool> Handle(EditUserRequest request, CancellationToken cancellationToken)
         {
-            if (request.Password != null)
-            {
-                request.Password = BCrypt.Net.BCrypt.HashPassword(request.Password);
-            }
             return _userDataService.EditUser(request);
         }
     }

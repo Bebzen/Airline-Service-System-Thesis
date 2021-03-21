@@ -86,7 +86,7 @@
     <Build Include="dbo\Programmability\Stored Procedures\EditFlightStatus.sql" />
     <Build Include="dbo\Programmability\Stored Procedures\GetFlightsByPilotId.sql" />
     <Build Include="dbo\Programmability\Stored Procedures\SearchFlights.sql" />
-    <Build Include="dbo\Programmability\Stored Procedures\GetFlight.sql" />
+    <Build Include="dbo\Programmability\Stored Procedures\GetFlightById.sql" />
     <Build Include="dbo\Programmability\Stored Procedures\CreateReservation.sql" />
     <Build Include="dbo\Programmability\Stored Procedures\GetFlightReservations.sql" />
     <Build Include="dbo\Programmability\Stored Procedures\GetUserReservations.sql" />
@@ -95,5 +95,8 @@
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="AirlineServiceSoftware.Database.refactorlog" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="dbo\Programmability\Script.PostDeployment1.sql" />
   </ItemGroup>
 </Project>

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using AirlineServiceSoftware.Entities;
 using AirlineServiceSoftware.Mediators.MediatorsRequests;
@@ -75,6 +77,13 @@ namespace AirlineServiceSoftware.DataAccess
                     parameters.Add("@PESEL", request.Pesel);
                     parameters.Add("@DocumentId", request.DocumentID);
 
+                    var validationParameters = new DynamicParameters();
+                    validationParameters.Add("@username", request.Username);
+
+                    var validationResult = conn.Query<User>("GetUserByUsername", validationParameters,
+                        commandType: CommandType.StoredProcedure);
+                    if (validationResult != null) return false;
+
                     var result = conn.Query<bool>("CreateUser", parameters, commandType: CommandType.StoredProcedure);
                     return true;
                 }
@@ -98,7 +107,6 @@ namespace AirlineServiceSoftware.DataAccess
                     var parameters = new DynamicParameters();
                     parameters.Add("@Id", request.Id);
                     parameters.Add("@Username", request.Username);
-                    if (request.Password != "noChange") parameters.Add("@Password", request.Password);
                     parameters.Add("@Role", request.Role);
                     parameters.Add("@FirstName", request.FirstName);
                     parameters.Add("@LastName", request.LastName);
@@ -108,10 +116,27 @@ namespace AirlineServiceSoftware.DataAccess
                     parameters.Add("@DocumentId", request.DocumentID);
                     if (request.Password != "noChange")
                     {
+                        request.Password = BCrypt.Net.BCrypt.HashPassword(request.Password);
+                        parameters.Add("@Password", request.Password);
+
+                        var validationParameters = new DynamicParameters();
+                        validationParameters.Add("@username", request.Username);
+
+                        var validationResult = conn.Query<User>("GetUserByUsername", validationParameters,
+                            commandType: CommandType.StoredProcedure);
+                        if (validationResult != null) return false;
+
                         var result = conn.Query<bool>("EditUser", parameters, commandType: CommandType.StoredProcedure);
                     }
                     else
                     {
+                        var validationParameters = new DynamicParameters();
+                        validationParameters.Add("@username", request.Username);
+
+                        var validationResult = conn.Query<User>("GetUserByUsername", validationParameters,
+                            commandType: CommandType.StoredProcedure);
+                        if (validationResult.Count() > 0) return false;
+
                         var result = conn.Query<bool>("EditUserNoPasswordChange", parameters, commandType: CommandType.StoredProcedure);
                     }
                         

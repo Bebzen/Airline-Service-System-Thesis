@@ -1,4 +1,4 @@
-﻿CREATE PROCEDURE [dbo].[GetFlight]
+﻿CREATE PROCEDURE [dbo].[GetFlightById]
 	@Id int
 AS
 BEGIN

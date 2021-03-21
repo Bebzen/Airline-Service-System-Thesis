@@ -19,10 +19,8 @@ export class AdminComponent implements OnInit {
     filteredUsers: IUser[] = [];
     usernameFilter: string;
     lastNameFilter: string;
-    addError = '';
-    deleteError = '';
-    deleteResultValid = '';
-    addResultValid = '';
+    error = '';
+    resultValid = '';
 
     constructor(private userService: UserService, private administratorService: AdministratorService, public dialog: MatDialog) {
         this.newUser = {} as IUser;
@@ -61,15 +59,22 @@ export class AdminComponent implements OnInit {
     }
 
     onClickCreateUser() {
-        this.administratorService.createUser(this.newUser).subscribe(
-            result => {
-                this.addResultValid = 'User Created.';
-                this.ngOnInit();
-            },
-            error => {
-                this.addError = error;
-            }
-        );
+        this.resultValid = '';
+        this.error = '';
+        if(!this.newUser.username || !this.newUser.password || !this.newUser.role || !this.newUser.firstName || !this.newUser.lastName || !this.newUser.email) {
+            this.error = `Couldn't create the user`;
+        } else {
+            this.administratorService.createUser(this.newUser).subscribe(
+                result => {
+                    this.resultValid = 'User Created.';
+                    this.ngOnInit();
+                },
+                error => {
+                    this.error = `Couldn't create the user.`;
+                }
+            );
+        }
+        
     }
 
     onClickEditUser(user: IUser) {
@@ -81,13 +86,15 @@ export class AdminComponent implements OnInit {
     }
 
     onClickDeleteUser(user: IUser) {
+        this.resultValid = '';
+        this.error = '';
         this.administratorService.deleteUser(user.id).subscribe(
             result => {
-                this.deleteResultValid = 'User Deleted.';
+                this.resultValid = 'User Deleted.';
                 this.ngOnInit();
             },
             error => {
-                this.deleteError = error;
+                this.error = `User couldn't be deleted.`;
             }
         );
 

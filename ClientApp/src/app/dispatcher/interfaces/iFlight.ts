@@ -14,7 +14,6 @@ export interface IFlight {
     landingHour: Time;
     planeType: PlaneType;
     totalSeats: number;
-    remainingSeats: number;
     isApproved: boolean;
     isCompleted: boolean;
 }

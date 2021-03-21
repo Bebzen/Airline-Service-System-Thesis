@@ -28,10 +28,10 @@ export class UserEditDialogComponent {
     onClickEditUser(user: IUser) {
         this.administratorService.editUser(user).subscribe(
             result => {
-                console.log(result);
+                this.dialogRef.close();
             },
             error => {
-                this.error = error;
+                this.error = `Couldn't edit the User.`;
             }
         );
     }

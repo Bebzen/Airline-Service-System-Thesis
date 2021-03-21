@@ -11,7 +11,8 @@
         <tbody>
             <tr *ngFor="let seat of reservations">
                 <td>
-                    <button mat-raised-button color="primary" (click)="onClickEditReservation(seat)">{{seat.seatNumber}}</button>
+                    <button *ngIf="!seat.isValid" mat-raised-button color="warn" (click)="onClickEditReservation(seat)">{{seat.seatNumber}}</button>
+                    <button *ngIf="seat.isValid" mat-raised-button color="primary" (click)="onClickEditReservation(seat)">{{seat.seatNumber}}</button>
                 </td>
                 <td>
                     {{seat.user.firstName}} {{seat.user.lastName}}

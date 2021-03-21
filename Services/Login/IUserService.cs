@@ -7,7 +7,7 @@ namespace AirlineServiceSoftware.Services
     public interface IUserService
     {
         User Authenticate(string username, string password);
-        IEnumerable<User> GetUsers();
+        IEnumerable<User> GetAllUsers();
         User GetUserById(int id);
         Boolean CreateUser(User newUser);
         Boolean EditUser(User editUser);
