@@ -49,6 +49,7 @@ namespace AirlineServiceSoftware.Services.Flights
         {
             var result = _mediator.Send(new EditFlightRequest()
             {
+                Id = editFlight.Id,
                 Crew = editFlight.Crew,
                 FlightNumber = editFlight.FlightNumber,
                 StartingAirportName = editFlight.StartingAirportName,

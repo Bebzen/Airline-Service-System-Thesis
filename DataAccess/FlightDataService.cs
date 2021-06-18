@@ -96,7 +96,7 @@ namespace AirlineServiceSoftware.DataAccess
                     parameters.Add("@IsApproved", request.IsApproved);
                     parameters.Add("@IsCompleted", request.IsCompleted);
 
-                    conn.Query("EditFlight", parameters, commandType: CommandType.StoredProcedure);
+                    var result = conn.Query("EditFlight", parameters, commandType: CommandType.StoredProcedure);
                     return true;
                 }
             }

@@ -21,7 +21,6 @@ export class CustomerComponent implements OnInit {
     isLoading = true;
     user: IUser;
     reservations: IReservation[];
-    // dodajemy gdzieś div z #paypalRef i tam wstawi się guzik. boże co za gówno.
     constructor(
         private router: Router,
         private customerService: CustomerService,

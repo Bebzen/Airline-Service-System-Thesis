@@ -3,7 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { IReservation } from 'src/app/customer/interfaces/iReservation';
 import { IFlight } from 'src/app/dispatcher/interfaces/iFlight';
 import { IUser } from 'src/app/login/interfaces/iUser';
-import { IReservationRequest } from '../interfaces/IReservationRequest';
+import { IReservationCreationRequest } from '../interfaces/iReservationCreationRequest';
 import { CheckoutService } from '../services/checkout.service';
 
 @Component({
@@ -13,7 +13,7 @@ import { CheckoutService } from '../services/checkout.service';
 })
 export class PaymentDialogComponent implements AfterViewInit {
 
-    newReservation: IReservationRequest;
+    newReservation: IReservationCreationRequest;
 
     @ViewChild('paypalRef', {static: true}) private paypalRef: ElementRef;
 
@@ -56,7 +56,7 @@ export class PaymentDialogComponent implements AfterViewInit {
         @Inject(MAT_DIALOG_DATA) public data: {seat: string, flight: IFlight, user: IUser}
     ) {
         this.paymentAmount = 60;
-        this.newReservation = {} as IReservationRequest;
+        this.newReservation = {} as IReservationCreationRequest;
     }
 
     private configurePaymentAmount() {
@@ -78,10 +78,10 @@ export class PaymentDialogComponent implements AfterViewInit {
     }
 
     private createTransaction(transactionId: string) {
-        this.newReservation.flightId = this.data.flight.id;
+        this.newReservation.flight = this.data.flight;
         this.newReservation.price = this.paymentAmount;
         this.newReservation.seatNumber = this.data.seat;
-        this.newReservation.user = this.data.user;
+        this.newReservation.userId = this.data.user.id;
         this.newReservation.transactionId = transactionId;
         this.newReservation.isValid = true;
         this.checkoutService.createReservation(this.newReservation).subscribe(result => {

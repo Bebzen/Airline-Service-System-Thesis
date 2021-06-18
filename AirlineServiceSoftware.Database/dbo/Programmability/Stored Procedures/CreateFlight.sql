@@ -8,7 +8,6 @@
 @LandingHour time(7),
 @PlaneType nvarchar(25),
 @TotalSeats int,
-@RemainingSeats int,
 @IsApproved bit,
 @IsCompleted bit
 AS
