@@ -4,7 +4,7 @@ import { IReservation } from 'src/app/customer/interfaces/iReservation';
 import { IFlight } from 'src/app/dispatcher/interfaces/iFlight';
 import { environment } from 'src/environments/environment';
 import { IEditReservationRequest } from '../interfaces/iEditReservationRequest';
-import { IReservationRequest } from '../interfaces/IReservationRequest';
+import { IReservationCreationRequest } from '../interfaces/iReservationCreationRequest';
 
 @Injectable()
 export class CheckoutService {
@@ -15,7 +15,7 @@ export class CheckoutService {
         return this.http.get<IFlight>(`${environment.apiUrl}Flights/GetFlight/${id}`);
     }
 
-    createReservation(reservation: IReservationRequest) {
+    createReservation(reservation: IReservationCreationRequest) {
         return this.http.post(`${environment.apiUrl}Reservations/CreateReservation`, reservation);
     }
 

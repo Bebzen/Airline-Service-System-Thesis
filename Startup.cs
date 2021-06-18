@@ -7,7 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using System.Threading;
 using AirlineServiceSoftware.DataAccess;
 using AirlineServiceSoftware.Helpers;
 using AirlineServiceSoftware.Services;
@@ -116,6 +115,8 @@ namespace AirlineServiceSoftware
             }
 
             app.UseRouting();
+
+            
 
             app.UseAuthentication();
             app.UseAuthorization();

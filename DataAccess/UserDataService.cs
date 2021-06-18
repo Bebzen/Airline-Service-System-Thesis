@@ -82,7 +82,7 @@ namespace AirlineServiceSoftware.DataAccess
 
                     var validationResult = conn.Query<User>("GetUserByUsername", validationParameters,
                         commandType: CommandType.StoredProcedure);
-                    if (validationResult != null) return false;
+                    if (validationResult.Count() > 0) return false;
 
                     var result = conn.Query<bool>("CreateUser", parameters, commandType: CommandType.StoredProcedure);
                     return true;
@@ -119,24 +119,10 @@ namespace AirlineServiceSoftware.DataAccess
                         request.Password = BCrypt.Net.BCrypt.HashPassword(request.Password);
                         parameters.Add("@Password", request.Password);
 
-                        var validationParameters = new DynamicParameters();
-                        validationParameters.Add("@username", request.Username);
-
-                        var validationResult = conn.Query<User>("GetUserByUsername", validationParameters,
-                            commandType: CommandType.StoredProcedure);
-                        if (validationResult != null) return false;
-
                         var result = conn.Query<bool>("EditUser", parameters, commandType: CommandType.StoredProcedure);
                     }
                     else
                     {
-                        var validationParameters = new DynamicParameters();
-                        validationParameters.Add("@username", request.Username);
-
-                        var validationResult = conn.Query<User>("GetUserByUsername", validationParameters,
-                            commandType: CommandType.StoredProcedure);
-                        if (validationResult.Count() > 0) return false;
-
                         var result = conn.Query<bool>("EditUserNoPasswordChange", parameters, commandType: CommandType.StoredProcedure);
                     }
                         
